@@ -70,7 +70,7 @@
 
         /* GRID */
         .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
-        .game-card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 15 rgba(0,0,0,0.05); }
+        .game-card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         
         .card-img-wrapper { position: relative; width: 100%; height: 180px; background-color: #2f3542; }
@@ -125,29 +125,32 @@
             }
         };
 
-        fetch('database.json')
-            .then(function(response) { return response.json(); })
-            .then(function(data) {
-                databaseLokal = data;
-                var visual = data.pengaturan_visual;
-                
-                if (visual.gambar_background) {
-                    document.body.style.backgroundImage = "url('" + visual.gambar_background + "')";
-                } else {
-                    document.body.style.backgroundImage = "none";
-                }
-                
-                var cssStyle = 
-                    ".game-card[data-platform='steam'] { border-color: " + visual.warna_tombol_steam + "; }\n" +
-                    ".game-card[data-platform='steam'] .platform-badge { border: 1px solid " + visual.warna_tombol_steam + "; color: " + visual.warna_tombol_steam + "; }\n" +
-                    ".game-card[data-platform='steam'] .game-link { background-color: " + visual.warna_tombol_steam + "; }\n" +
-                    ".game-card[data-platform='mobile'] { border-color: " + visual.warna_tombol_mobile + "; }\n" +
-                    ".game-card[data-platform='mobile'] .platform-badge { border: 1px solid " + visual.warna_tombol_mobile + "; color: " + visual.warna_tombol_mobile + "; }\n" +
-                    ".game-card[data-platform='mobile'] .game-link { background-color: " + visual.warna_tombol_mobile + "; }\n";
-                document.getElementById('dynamicStyles').innerHTML = cssStyle;
+        // PENGAMAN UTAMA: Tunggu elemen HTML siap dibaca
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('database.json')
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    databaseLokal = data;
+                    var visual = data.pengaturan_visual;
+                    
+                    if (visual.gambar_background) {
+                        document.body.style.backgroundImage = "url('" + visual.gambar_background + "')";
+                    } else {
+                        document.body.style.backgroundImage = "none";
+                    }
+                    
+                    var cssStyle = 
+                        ".game-card[data-platform='steam'] { border-color: " + visual.warna_tombol_steam + "; }\n" +
+                        ".game-card[data-platform='steam'] .platform-badge { border: 1px solid " + visual.warna_tombol_steam + "; color: " + visual.warna_tombol_steam + "; }\n" +
+                        ".game-card[data-platform='steam'] .game-link { background-color: " + visual.warna_tombol_steam + "; }\n" +
+                        ".game-card[data-platform='mobile'] { border-color: " + visual.warna_tombol_mobile + "; }\n" +
+                        ".game-card[data-platform='mobile'] .platform-badge { border: 1px solid " + visual.warna_tombol_mobile + "; color: " + visual.warna_tombol_mobile + "; }\n" +
+                        ".game-card[data-platform='mobile'] .game-link { background-color: " + visual.warna_tombol_mobile + "; }\n";
+                    document.getElementById('dynamicStyles').innerHTML = cssStyle;
 
-                renderHalaman();
-            });
+                    renderHalaman();
+                });
+        });
 
         function renderHalaman() {
             if(!databaseLokal) return;
@@ -191,8 +194,4 @@
 
         function filterPlatform(platform, btn) {
             var buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(function(b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-
-            var cards = document.querySelectorAll('.game-card');
-            cards.forEach(function(card) {
+        }
