@@ -5,19 +5,22 @@
     "warna_tombol_mobile": "#2ed573"
   },
   "daftar_game": [
-    {
-      "judul": "Contoh Game PC Hero",
+   {
+      "judul": "The Adventure of TED and the lost magic crystals",
       "platform": "steam",
-      "link_gambar": "https://unsplash.com",
-      "deskripsi": "Ini adalah contoh game PC yang bisa Anda ganti di file database.json.",
-      "link_tujuan": "https://steampowered.com"
-    },
-    {
-      "judul": "Contoh Game Mobile RPG",
+      "link_gambar": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2461490/7904d8f9da100b70c9b1ec5a5d9108e442e77625/header.jpg?t=1782466826",
+      "deskripsi": "A cozy journey through a world of color. Join TED in this relaxing 2.5D platformer as he jumps, explores, and fights to save the Squirrel Kingdom. Solve relaxing puzzles and discover hidden treasures.",
+      "link_tujuan": "https://store.steampowered.com/app/2461490/The_Adventure_of_TED__and_the_lost_magic_crystals/"
+ }
+,
+
+{
+      "judul": "BRO PETRUX",
       "platform": "mobile",
-      "link_gambar": "https://unsplash.com",
-      "deskripsi": "Ini adalah contoh game Mobile Android yang bisa Anda edit dengan mudah.",
-      "link_tujuan": "https://google.com"
-    }
+      "link_gambar": "https://play-lh.googleusercontent.com/rzhwhomw5QMd40KD_r49yccr4ZhpVof8sap0ixCbe_j1AyjjgAK6q8KAbyjxlveeDRT2kK4Sgz2KlfEnhKZb4g=w5120-h2880",
+      "deskripsi": "Bro PETRUX: Terror of boar demon - Indonesian folklore Runner Game
+This exciting runner game takes you into a world full of adventure! Play as Bro Petrux, a young man relaxing at the village Kliwon watchpost, when suddenly he is chased by the Pig King. Run as fast as you can, collect coins and mystical objects scattered across each level, and earn the Platinum trophy!.",
+      "link_tujuan": "https://play.google.com/store/apps/details?id=com.RgamesID.BangPetruxTerorbabingepet"
+ }
   ]
 }
