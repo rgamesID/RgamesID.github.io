@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RgamesID - Admin Dashboard Panel</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #121212; color: #ffffff; padding: 40px 20px; }
+        .admin-box { background: #1e1e1e; max-width: 800px; margin: 0 auto; border-radius: 12px; border: 1px solid #ff4757; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        h1 { color: #ff4757; margin-bottom: 5px; text-align: center; }
+        .sub { text-align: center; color: #a4b0be; margin-bottom: 25px; font-size: 0.95rem; }
+        
+        .tab-menu { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 1px solid #2f3542; padding-bottom: 10px; }
+        .tab-btn { background: #2f3542; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .tab-btn.active { background: #ff4757; }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #a4b0be; font-weight: 500; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; background: #2f3542; border: 1px solid #57606f; border-radius: 6px; color: #fff; font-size: 1rem; }
+        .form-group textarea { height: 120px; resize: vertical; }
+        
+        .color-pickers { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .color-item { display: flex; align-items: center; gap: 10px; background: #2f3542; padding: 10px; border-radius: 6px; }
+        .color-item input[type="color"] { width: 45px; height: 35px; cursor: pointer; border: none; background: none; }
+
+        .btn-generate { display: block; width: 100%; background: #00ff88; color: #121212; border: none; padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 25px; transition: 0.2s; }
+        .btn-generate:hover { background: #00cc6e; }
+        
+        .output-section { display: none; margin-top: 30px; background: #0c0c0c; padding: 20px; border-radius: 8px; border: 1px dashed #00ff88; }
+        .output-section h3 { color: #00ff88; margin-bottom: 10px; }
+        .code-box { width: 100%; height: 180px; background: #000; color: #00ff88; font-family: monospace; padding: 12px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 10px; }
+        .btn-copy { background: #57606f; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .btn-copy:hover { background: #747d8c; }
+        
+        .back-link { display: inline-block; margin-top: 20px; color: #a4b0be; text-decoration: none; font-size: 0.9rem; }
+        .back-link:hover { color: #ff4757; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-box">
+        <h1>RgamesID Creator Station</h1>
+        <p class="sub">Halaman khusus produksi konten website portofolio Anda</p>
+        
+        <div class="tab-menu">
+            <button class="tab-btn active" onclick="switchTab('tab-game', this)">🕹️ Konten Game Baru</button>
+            <button class="tab-btn" onclick="switchTab('tab-style', this)">🎨 Kustomisasi Desain</button>
+        </div>
+
+        <!-- AREA FILE INPUT GAME -->
+        <div id="tab-game" class="tab-content active">
+            <div class="form-group">
+                <label>Nama / Judul Game</label>
+                <input type="text" id="inputTitle" placeholder="Contoh: Space Wars Chronicle">
+            </div>
+            <div class="form-group">
+                <label>Pilih Platform / Kategori</label>
+                <select id="selectPlatform" onchange="checkCustomPlatform(this)">
+                    <option value="steam">Steam Game</option>
+                    <option value="mobile">Mobile Game</option>
+                    <option value="custom">+ Tambah Platform Baru...</option>
+                </select>
+                <input type="text" id="inputCustomPlatform" placeholder="Ketik nama platform baru (misal: Nintendo, EpicGames)" style="display:none; margin-top: 10px;">
+            </div>
+            <div class="form-group">
+                <label>Link Gambar / Banner Game Cover</label>
+                <input type="text" id="inputImg" placeholder="Tempel URL Direct Link Gambar berakhiran .jpg/.png ...">
+            </div>
+            <div class="form-group">
+                <label>Artikel / Review Singkat Game</label>
+                <textarea id="inputDesc" placeholder="Tuliskan gameplay, fitur, dan daya tarik game Anda di sini..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Link Aksi Tombol (Link Download/Beli)</label>
+                <input type="text" id="inputLink" placeholder="https://steampowered.com...">
+            </div>
+        </div>
+
+        <!-- AREA ATUR DESAIN VISUAL -->
+        <div id="tab-style" class="tab-content">
+            <div class="form-group">
+                <label>Link URL Gambar Latar Belakang (Background Website)</label>
+                <input type="text" id="inputBgUrl" placeholder="Kosongkan jika ingin warna hitam polos bawaan...">
+            </div>
+            <div class="form-group">
+                <label>Atur Warna Tombol & Aksen Frame Platform</label>
+                <div class="color-pickers" id="colorPickerGrid">
+                    <div class="color-item">
+                        <input type="color" id="color-steam" value="#ff4757">
+                        <span>Steam Game</span>
+                    </div>
+                    <div class="color-item">
+                        <input type="color" id="color-mobile" value="#ff4757">
+                        <span>Mobile Game</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-generate" onclick="startGeneration()">⚡ Generate File HTML Utama Baru</button>
+
+        <!-- KOTAK EKSPOR KODE -->
+        <div class="output-section" id="outputSection">
+            <h3>🎉 Pembuatan Kode Sukses!</h3>
+            <p style="font-size:0.85rem; color:#ced6e0; margin-bottom:12px;">Ikuti langkah di bawah ini untuk menyimpan konten secara permanen:</p>
+            <ol style="font-size:0.85rem; color:#ced6e0; margin-left:15px; margin-bottom:15px; line-height:1.6;">
+                <li>Klik tombol <b>"Salin Kode"</b> di bawah ini.</li>
+                <li>Kembali ke GitHub, buka file <b>index.html</b> (bukan file admin.html ini).</li>
+                <li>Hapus semua isinya, lalu <b>paste</b> kode baru yang disalin ini ke sana.</li>
+                <li>Lakukan Commit. Berhasil!</li>
+            </ol>
+            <textarea class="code-box" id="codeOutput" readonly></textarea>
+            <button class="btn-copy" onclick="copyCode()">📋 Salin Kode</button>
+        </div>
+        
+        <a href="index.html" class="back-link">← Kembali ke Halaman Utama Portofolio</a>
+    </div>
+
+    <!-- STRUKTUR DATA CETAKAN HTML UTAMA (TEMPLATE KORIDOR) -->
+    <div id="htmlTemplateStore" style="display:none;">
+        <div class="game-card" id="cardBlueprint">
+            <div class="card-img-wrapper">
+                <img src="" class="game-img" alt="Game Cover">
+                <span class="platform-badge"></span>
+            </div>
+            <div class="game-info">
+                <h2 class="game-title"></h2>
+                <p class="game-description"></p>
+                <a href="" target="_blank" class="game-link">Mainkan Sekarang</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sesi Menampung Elemen Sementara Selama Browser Terbuka
+        var addedCardsHTML = "";
+        var extraCSSRules = "";
+        var extraFiltersHTML = "";
+        var extraSelectOptions = "";
+        var extraPickersHTML = "";
+
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+            btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function checkCustomPlatform(select) {
+            var customInput = document.getElementById('inputCustomPlatform');
+            customInput.style.display = (select.value === 'custom') ? 'block' : 'none';
+        }
+
+        function startGeneration() {
+            var title = document.getElementById('inputTitle').value.trim();
+            var desc = document.getElementById('inputDesc').value.trim();
+            var bgUrl = document.getElementById('inputBgUrl').value.trim();
+
+            // 1. Memproses Pembuatan Kartu Game jika Formulir Diisi
+            if (title && desc) {
+                var img = document.getElementById('inputImg').value.trim() || 'https://unsplash.com';
+                var link = document.getElementById('inputLink').value.trim() || '#';
+                var selectEl = document.getElementById('selectPlatform');
+                var platformValue = selectEl.value;
+                var platformLabel = selectEl.options[selectEl.selectedIndex].text;
+
+                if (platformValue === 'custom') {
+                    var customName = document.getElementById('inputCustomPlatform').value.trim();
+                    if (!customName) { alert('Nama platform baru wajib diisi!'); return; }
+                    platformValue = customName.toLowerCase().replace(/\s+/g, '-');
+                    platformLabel = customName;
+
+                    // Catat tombol filter baru
