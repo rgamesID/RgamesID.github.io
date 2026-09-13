@@ -7,15 +7,10 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #121212; color: #ffffff; padding-bottom: 60px; }
-        
-        /* HEADER PORTFOLIO */
         header { text-align: center; padding: 50px 20px 30px; }
         header h1 { font-size: 2.8rem; color: #ff4757; margin-bottom: 10px; }
         header p { color: #a4b0be; font-size: 1.1rem; }
-        
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        /* GRID GAME */
         .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
         .game-card { background-color: #1e1e1e; border: 1px solid #2f3542; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; }
         .game-card:hover { transform: translateY(-5px); border-color: #ff4757; box-shadow: 0 8px 25px rgba(255, 71, 87, 0.15); }
@@ -25,24 +20,18 @@
         .game-description { color: #ced6e0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; white-space: pre-line; }
         .game-link { display: inline-block; text-align: center; background-color: #ff4757; color: #ffffff; padding: 12px; text-decoration: none; font-weight: bold; border-radius: 6px; transition: 0.2s; }
         .game-link:hover { background-color: #ff6b81; }
-
-        /* TOMBOL RAHASIA KEDASHBOARD */
-        .admin-trigger { position: fixed; bottom: 20px; right: 20px; background: #2f3542; color: #fff; border: none; padding: 10px 15px; border-radius: 50px; cursor: pointer; opacity: 0.3; transition: 0.3s; z-index: 999; text-decoration: none; font-size: 0.8rem; }
-        .admin-trigger:hover { opacity: 1; background: #ff4757; }
-
-        /* MODAL DASHBOARD ADMIN */
+        .admin-trigger { position: fixed; bottom: 20px; right: 20px; background: #2f3542; color: #fff; border: none; padding: 12px 20px; border-radius: 50px; cursor: pointer; font-weight: bold; z-index: 999; box-shadow: 0 4px 10px rgba(0,0,0,0.5); border: 1px solid #ff4757; }
+        .admin-trigger:hover { background: #ff4757; }
         .dashboard-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; overflow-y: auto; padding: 40px 20px; }
-        .dashboard-box { background: #1e1e1e; max-width: 700px; margin: 0 auto; border-radius: 12px; border: 1px solid #ff4757; padding: 30px; }
+        .dashboard-box { background: #1e1e1e; max-width: 700px; margin: 0 auto; border-radius: 12px; border: 1px solid #ff4757; padding: 30px; color: #fff; text-align: left; }
         .dashboard-box h2 { color: #ff4757; margin-bottom: 20px; display: flex; justify-content: space-between; }
         .close-dash { cursor: pointer; color: #a4b0be; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; color: #a4b0be; font-weight: 500; }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; background: #2f3542; border: 1px solid #57606f; border-radius: 6px; color: #fff; font-size: 1px; font-size: 1rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; background: #2f3542; border: 1px solid #57606f; border-radius: 6px; color: #fff; font-size: 1rem; }
         .form-group textarea { height: 120px; resize: vertical; }
         .btn-publish { display: block; width: 100%; background: #ff4757; color: white; border: none; padding: 14px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 10px; }
         .btn-publish:hover { background: #ff6b81; }
-        
-        /* OUTPUT AREA KODE */
         .output-section { display: none; margin-top: 25px; background: #121212; padding: 15px; border-radius: 6px; border: 1px dashed #57606f; }
         .output-section p { font-size: 0.9rem; color: #00ff88; margin-bottom: 10px; }
         .code-box { width: 100%; height: 150px; background: #000; color: #00ff88; font-family: monospace; padding: 10px; border-radius: 4px; font-size: 0.85rem; }
@@ -51,22 +40,20 @@
 </head>
 <body>
 
-    <!-- ======== HALAMAN PORTFOLIO UTAMA ======== -->
     <header>
         <h1>RgamesID Studios</h1>
         <p>Mainkan koleksi game seru hasil karya kami langsung dari browser atau perangkat Anda!</p>
     </header>
 
     <div class="container">
-        <!-- Daftar kartu game akan dirender otomatis di dalam sini -->
         <div class="game-grid" id="gameGrid">
             
-            <!-- GAME DATA AWAL (Silakan ganti/hapus nanti lewat dashboard) -->
+            <!-- CONTOH KARTU GAME -->
             <div class="game-card">
                 <img src="https://unsplash.com" class="game-img" alt="Game Cover">
                 <div class="game-info">
-                    <h2 class="game-title">Contoh Game Pertualangan</h2>
-                    <p class="game-description">Ini adalah deskripsi atau artikel contoh. Tuliskan keseruan game Anda di sini agar menarik banyak pemain untuk mendownloadnya.</p>
+                    <h2 class="game-title">Nama Game Pertama</h2>
+                    <p class="game-description">Tuliskan artikel atau deskripsi game pertama Anda di sini. Ceritakan alur cerita singkat, genre game, dan fitur-fitur seru yang ada di dalamnya.</p>
                     <a href="https://google.com" target="_blank" class="game-link">Mainkan Sekarang</a>
                 </div>
             </div>
@@ -74,11 +61,10 @@
         </div>
     </div>
 
-    <!-- Tombol Rahasia di pojok kanan bawah untuk masuk ke Dashboard Admin -->
+    <!-- TOMBOL KE DASHBOARD -->
     <button class="admin-trigger" onclick="toggleDashboard()">⚙️ Admin Dashboard</button>
 
-
-    <!-- ======== MODAL DASHBOARD ADMIN (TERSEMBUNYI) ======== -->
+    <!-- MODAL DASHBOARD -->
     <div class="dashboard-overlay" id="dashboard">
         <div class="dashboard-box">
             <h2>Tambah Game Baru <span class="close-dash" onclick="toggleDashboard()">&times;</span></h2>
@@ -90,30 +76,23 @@
 
             <div class="form-group">
                 <label>Link Gambar / Banner Game</label>
-                <input type="text" id="inputImg" placeholder="Tempel link URL gambar (misal dari Imgur/Unsplash)...">
-                <p style="font-size: 0.75rem; color:#a4b0be; margin-top:5px;">💡 Tips: Upload gambar game Anda ke situs gratis seperti imgur.com atau postimages.org, lalu salin "Direct Link"-nya ke sini.</p>
+                <input type="text" id="inputImg" placeholder="Tempel link URL gambar (misal dari Imgur)...">
             </div>
 
             <div class="form-group">
                 <label>Artikel / Deskripsi Game</label>
-                <textarea id="inputDesc" placeholder="Tulis review atau artikel game di sini..."></textarea>
+                <textarea id="inputDesc" placeholder="Tulis deskripsi game di sini..."></textarea>
             </div>
 
             <div class="form-group">
                 <label>Link Download / Mainkan Game</label>
-                <input type="text" id="inputLink" placeholder="https://google.com/store/apps/details?id=...">
+                <input type="text" id="inputLink" placeholder="https://...">
             </div>
 
             <button class="btn-publish" onclick="publishGame()">🚀 Tambah & Publish</button>
 
-            <!-- Bagian untuk menyalin kode ke GitHub setelah klik publish -->
             <div class="output-section" id="outputSection">
-                <p>✅ Game Berhasil Ditambahkan ke Tampilan! Agar tersimpan permanen di website Anda, ikuti langkah berikut:</p>
-                <ol style="font-size:0.85rem; color:#ced6e0; margin-left:15px; margin-bottom:10px;">
-                    <li>Klik tombol <b>"Salin Seluruh Kode"</b> di bawah ini.</li>
-                    <li>Buka file <b>index.html</b> Anda di GitHub, lalu ganti (overwrite) seluruh kodenya dengan kode yang baru Anda salin ini.</li>
-                    <li>Commit Changes di GitHub. Selesai!</li>
-                </ol>
+                <p>✅ Berhasil! Ikuti langkah penyimpanan ini:</p>
                 <textarea class="code-box" id="codeOutput" readonly></textarea>
                 <button class="btn-copy" onclick="copyCode()">📋 Salin Seluruh Kode</button>
             </div>
@@ -121,13 +100,11 @@
     </div>
 
     <script>
-        // Fungsi untuk Buka/Tutup Dashboard
         function toggleDashboard() {
             const dash = document.getElementById('dashboard');
             dash.style.display = (dash.style.display === 'block') ? 'none' : 'block';
         }
 
-        // Fungsi ketika tombol "Tambah & Publish" diklik
         function publishGame() {
             const title = document.getElementById('inputTitle').value.trim();
             const img = document.getElementById('inputImg').value.trim() || 'https://unsplash.com';
@@ -139,7 +116,6 @@
                 return;
             }
 
-            // 1. Tambahkan ke tampilan browser saat ini secara instan
             const grid = document.getElementById('gameGrid');
             const newCard = document.createElement('div');
             newCard.className = 'game-card';
@@ -153,19 +129,31 @@
             `;
             grid.appendChild(newCard);
 
-            // 2. Generate ulang seluruh file HTML-nya agar bisa disalin ke GitHub
             generateNewHTML();
 
-            // Clear input form
             document.getElementById('inputTitle').value = '';
             document.getElementById('inputImg').value = '';
             document.getElementById('inputDesc').value = '';
             document.getElementById('inputLink').value = '';
             
-            // Tampilkan kotak salin kode
             document.getElementById('outputSection').style.display = 'block';
         }
 
-        // Fungsi generate kode HTML utuh
         function generateNewHTML() {
-            const currentHTML = document.documentElement.outerHTML;
+            const docClone = document.documentElement.cloneNode(true);
+            docClone.querySelector('#outputSection').style.display = 'block';
+            docClone.querySelector('#dashboard').style.display = 'none';
+            
+            const finalCode = "<!DOCTYPE html>\n<html lang=\"id\">\n" + docClone.innerHTML + "\n</html>";
+            document.getElementById('codeOutput').value = finalCode;
+        }
+
+        function copyCode() {
+            const codeBox = document.getElementById('codeOutput');
+            codeBox.select();
+            navigator.clipboard.writeText(codeBox.value);
+            alert('Kode disalin! Tempelkan (overwrite) ke file index.html Anda di GitHub.');
+        }
+    </script>
+</body>
+</html>
