@@ -8,11 +8,11 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
         body { 
-            background-color: #ffffff; /* Mengubah background menjadi putih murni */
+            background-color: #ffffff; 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: #121212; /* Mengubah teks umum menjadi gelap agar kontras di latar putih */
+            color: #121212; 
             padding-bottom: 80px; 
         }
         header { 
@@ -24,11 +24,11 @@
         }
         header h1 { 
             font-size: 2.8rem; 
-            color: #d4af37; /* Mengubah tulisan RgamesID Studios menjadi Kuning Emas */
+            color: #d4af37; 
             margin-bottom: 10px; 
         }
         header p { 
-            color: #4b4b4b; /* Mengubah sub-teks menjadi abu-abu gelap agar mudah dibaca */
+            color: #4b4b4b; 
             font-size: 1.1rem; 
         }
         
@@ -37,13 +37,14 @@
         .category-filter { text-align: center; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; background: rgba(30,30,30,0.05); padding: 15px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); }
         .filter-btn { background: #2f3542; color: #fff; border: 1px solid #57606f; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; }
         
-        /* WARNA AKTIF TOMBOL FILTER SESUAI PLATFORM */
         .category-filter button:nth-child(1).active { background: #747d8c !important; border-color: #747d8c !important; color: #fff; }
         .category-filter button:nth-child(2).active { background: #0074e4 !important; border-color: #0074e4 !important; color: #fff; }
-        .category-filter button:nth-child(3).active { background: #ff4757 !important; border-color: #ff4757 !important; color: #fff; }
+        .category-filter button:nth-child(3).active { background: #00875a !important; border-color: #00875a !important; color: #fff; }
 
         .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
-        .game-card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        
+        /* BASE STYLE KARTU GAME */
+        .game-card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         
         .card-img-wrapper { position: relative; width: 100%; height: 180px; background-color: #2f3542; }
@@ -65,17 +66,13 @@
     </header>
 
     <div class="container">
-        <!-- FILTER KATEGORI (BAHASA INGGRIS) -->
         <div class="category-filter" id="filterContainer">
             <button class="filter-btn active" onclick="filterPlatform('all', this)">All Games</button>
             <button class="filter-btn" onclick="filterPlatform('steam', this)">Steam Games</button>
             <button class="filter-btn" onclick="filterPlatform('mobile', this)">Mobile Games</button>
         </div>
 
-        <!-- GRID UTAMA -->
-        <div class="game-grid" id="gameGrid">
-            <!-- Data dimuat otomatis dari database.json -->
-        </div>
+        <div class="game-grid" id="gameGrid"></div>
     </div>
 
     <script>
@@ -85,11 +82,12 @@
                 var visual = data.pengaturan_visual;
                 document.body.style.backgroundImage = visual.gambar_background ? "url('" + visual.gambar_background + "')" : "none";
                 
+                // DISINI ATURAN WARNA GARIS TEPI (BORDER) DAN BADGE DIKUNCI 100% MENGIKUTI WARNA TOMBOL DATABASE
                 var cssStyle = 
-                    ".game-card[data-platform='steam'] { border-color: " + visual.warna_tombol_steam + "; }\n" +
+                    ".game-card[data-platform='steam'] { border: 2px solid " + visual.warna_tombol_steam + " !important; }\n" +
                     ".game-card[data-platform='steam'] .platform-badge { border: 1px solid " + visual.warna_tombol_steam + "; color: " + visual.warna_tombol_steam + "; }\n" +
                     ".game-card[data-platform='steam'] .game-link { background-color: " + visual.warna_tombol_steam + "; }\n" +
-                    ".game-card[data-platform='mobile'] { border-color: " + visual.warna_tombol_mobile + "; }\n" +
+                    ".game-card[data-platform='mobile'] { border: 2px solid " + visual.warna_tombol_mobile + " !important; }\n" +
                     ".game-card[data-platform='mobile'] .platform-badge { border: 1px solid " + visual.warna_tombol_mobile + "; color: " + visual.warna_tombol_mobile + "; }\n" +
                     ".game-card[data-platform='mobile'] .game-link { background-color: " + visual.warna_tombol_mobile + "; }\n";
                 document.getElementById('dynamicStyles').innerHTML = cssStyle;
@@ -99,8 +97,6 @@
                 
                 data.daftar_game.forEach(game => {
                     var badgeLabel = game.platform === 'steam' ? 'Steam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
-                    
-                    // TOMBOL AKSYON DIUBAH KE BAHASA INGGRIS
                     var buttonText = game.platform === 'steam' ? 'Buy on Steam' : (game.platform === 'mobile' ? 'Get it on Play Store' : 'Play Now');
                     
                     var cardHTML = 
