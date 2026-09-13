@@ -96,8 +96,8 @@
                 grid.innerHTML = "";
                 
                 data.daftar_game.forEach(game => {
-                    var badgeLabel = game.platform === 'PC steam' ? 'Steam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
-                    var buttonText = game.platform === 'PC steam' ? 'Buy on Steam' : (game.platform === 'mobile' ? 'Get it on Play Store' : 'Play Now');
+                    var badgeLabel = game.platform === 'PC Steam' ? 'PCSteam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
+                    var buttonText = game.platform === 'PC Steam' ? 'Buy on Steam' : (game.platform === 'mobile' ? 'Get it on Play Store' : 'Play Now');
                     
                     var cardHTML = 
                         '<div class="game-card" data-platform="' + game.platform + '">' +
