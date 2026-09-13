@@ -1,23 +1,26 @@
 {
-    "pengaturan_visual": {
-    "gambar_background": "https://unsplash.com",
+  "pengaturan_visual": {
+    "gambar_background": "",
     "warna_tombol_steam": "#0074e4",
     "warna_tombol_mobile": "#ff4757"
   },
-
   "daftar_game": [
     {
-      "judul": "The Adventure of TED and the lost magic crystals",
+      "judul_id": "Contoh Game PC Hero",
+      "judul_en": "PC Hero Game Example",
       "platform": "steam",
-      "link_gambar": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2461490/7904d8f9da100b70c9b1ec5a5d9108e442e77625/header.jpg?t=1782466826",
-      "deskripsi": "A cozy journey through a world of color. Join TED in this relaxing 2.5D platformer as he jumps, explores, and fights to save the Squirrel Kingdom. Solve relaxing puzzles and discover hidden treasures. .",
-      "link_tujuan": "https://store.steampowered.com/app/2461490/The_Adventure_of_TED__and_the_lost_magic_crystals/"
+      "link_gambar": "https://unsplash.com",
+      "deskripsi_id": "Ini adalah contoh deskripsi game PC dalam bahasa Indonesia.",
+      "deskripsi_en": "This is an example of a PC game description in English.",
+      "link_tujuan": "https://steampowered.com"
     },
     {
-      "judul": "Contoh Game Mobile RPG",
+      "judul_id": "Contoh Game Mobile RPG",
+      "judul_en": "Mobile RPG Game Example",
       "platform": "mobile",
       "link_gambar": "https://unsplash.com",
-      "deskripsi": "Ini adalah contoh game Mobile Android yang bisa Anda edit dengan mudah.",
+      "deskripsi_id": "Ini adalah contoh deskripsi game Mobile dalam bahasa Indonesia.",
+      "deskripsi_en": "This is an example of a Mobile game description in English.",
       "link_tujuan": "https://google.com"
     }
   ]
