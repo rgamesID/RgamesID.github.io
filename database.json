@@ -1,26 +1,22 @@
 {
   "pengaturan_visual": {
     "gambar_background": "",
-    "warna_tombol_steam": "#0074e4",
-    "warna_tombol_mobile": "#ff4757"
+    "warna_tombol_steam": "#ff4757",
+    "warna_tombol_mobile": "#2ed573"
   },
   "daftar_game": [
     {
-      "judul_id": "Contoh Game PC Hero",
-      "judul_en": "PC Hero Game Example",
+      "judul": "Contoh Game PC Hero",
       "platform": "steam",
       "link_gambar": "https://unsplash.com",
-      "deskripsi_id": "Ini adalah contoh deskripsi game PC dalam bahasa Indonesia.",
-      "deskripsi_en": "This is an example of a PC game description in English.",
+      "deskripsi": "Ini adalah contoh game PC yang bisa Anda ganti di file database.json.",
       "link_tujuan": "https://steampowered.com"
     },
     {
-      "judul_id": "Contoh Game Mobile RPG",
-      "judul_en": "Mobile RPG Game Example",
+      "judul": "Contoh Game Mobile RPG",
       "platform": "mobile",
       "link_gambar": "https://unsplash.com",
-      "deskripsi_id": "Ini adalah contoh deskripsi game Mobile dalam bahasa Indonesia.",
-      "deskripsi_en": "This is an example of a Mobile game description in English.",
+      "deskripsi": "Ini adalah contoh game Mobile Android yang bisa Anda edit dengan mudah.",
       "link_tujuan": "https://google.com"
     }
   ]
