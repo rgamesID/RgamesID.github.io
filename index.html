@@ -7,18 +7,32 @@
     <style id="dynamicStyles"></style>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-        body { 
-            background-color: #121212; 
+               body { 
+            background-color: #ffffff; /* Mengubah background menjadi putih murni */
+            background-image: var(--bg-image);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: #ffffff; 
+            color: #121212; /* Mengubah teks umum menjadi hitam agar terbaca di background putih */
             padding-bottom: 80px; 
         }
-        header { text-align: center; padding: 50px 20px 20px; background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); margin-bottom: 20px; }
-        header h1 { font-size: 2.8rem; color: #ff4757; margin-bottom: 10px; }
-        header p { color: #a4b0be; font-size: 1.1rem; }
-        
+        header { 
+            text-align: center; 
+            padding: 50px 20px 20px; 
+            background: rgba(255, 255, 255, 0.8); /* Mengubah header menjadi putih transparan */
+            backdrop-filter: blur(5px); 
+            margin-bottom: 20px; 
+        }
+        header h1 { 
+            font-size: 2.8rem; 
+            color: #d4af37; /* Mengubah teks RgamesID Studios menjadi Kuning Emas (Gold) */
+            margin-bottom: 10px; 
+        }
+        header p { 
+            color: #4b4b4b; /* Mengubah sub-teks menjadi abu-abu gelap agar kontras */
+            font-size: 1.1rem; 
+        }
+
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
         .category-filter { text-align: center; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; background: rgba(30,30,30,0.6); padding: 15px; border-radius: 50px; }
