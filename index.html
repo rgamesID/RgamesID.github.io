@@ -7,33 +7,49 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #121212; color: #ffffff; padding-bottom: 60px; }
-        header { text-align: center; padding: 50px 20px 30px; }
+        header { text-align: center; padding: 50px 20px 20px; }
         header h1 { font-size: 2.8rem; color: #ff4757; margin-bottom: 10px; }
         header p { color: #a4b0be; font-size: 1.1rem; }
+        
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* SISTEM FILTER KATEGORI */
+        .category-filter { text-align: center; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .filter-btn { background: #2f3542; color: #fff; border: 1px solid #57606f; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        .filter-btn:hover, .filter-btn.active { background: #ff4757; border-color: #ff4757; }
+
+        /* GRID GAME */
         .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
         .game-card { background-color: #1e1e1e; border: 1px solid #2f3542; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; }
         .game-card:hover { transform: translateY(-5px); border-color: #ff4757; box-shadow: 0 8px 25px rgba(255, 71, 87, 0.15); }
-        .game-img { width: 100%; height: 180px; object-fit: cover; background-color: #2f3542; }
+        
+        /* LABEL PLATFORM DI KARTU GAME */
+        .card-img-wrapper { position: relative; width: 100%; height: 180px; background-color: #2f3542; }
+        .game-img { width: 100%; height: 100%; object-fit: cover; }
+        .platform-badge { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.8); border: 1px solid #ff4757; color: #ff4757; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+
         .game-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
         .game-title { font-size: 1.5rem; margin-bottom: 10px; color: #ffffff; }
         .game-description { color: #ced6e0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; white-space: pre-line; }
         .game-link { display: inline-block; text-align: center; background-color: #ff4757; color: #ffffff; padding: 12px; text-decoration: none; font-weight: bold; border-radius: 6px; transition: 0.2s; }
         .game-link:hover { background-color: #ff6b81; }
-        .admin-trigger { position: fixed; bottom: 20px; right: 20px; background: #2f3542; color: #fff; border: none; padding: 12px 20px; border-radius: 50px; cursor: pointer; font-weight: bold; z-index: 999; box-shadow: 0 4px 10px rgba(0,0,0,0.5); border: 1px solid #ff4757; }
-        .admin-trigger:hover { background: #ff4757; }
+        
+        /* BUTTON DASHBOARD */
+        .admin-trigger { position: fixed; bottom: 20px; right: 20px; background: #ff4757; color: #fff; border: none; padding: 12px 20px; border-radius: 50px; cursor: pointer; font-weight: bold; z-index: 999; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .admin-trigger:hover { background: #ff6b81; }
+        
+        /* DASHBOARD BOX */
         .dashboard-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; overflow-y: auto; padding: 40px 20px; }
         .dashboard-box { background: #1e1e1e; max-width: 700px; margin: 0 auto; border-radius: 12px; border: 1px solid #ff4757; padding: 30px; color: #fff; text-align: left; }
         .dashboard-box h2 { color: #ff4757; margin-bottom: 20px; display: flex; justify-content: space-between; }
         .close-dash { cursor: pointer; color: #a4b0be; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; color: #a4b0be; font-weight: 500; }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; background: #2f3542; border: 1px solid #57606f; border-radius: 6px; color: #fff; font-size: 1rem; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; background: #2f3542; border: 1px solid #57606f; border-radius: 6px; color: #fff; font-size: 1rem; }
         .form-group textarea { height: 120px; resize: vertical; }
         .btn-publish { display: block; width: 100%; background: #ff4757; color: white; border: none; padding: 14px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 10px; }
         .btn-publish:hover { background: #ff6b81; }
         .output-section { display: none; margin-top: 25px; background: #121212; padding: 15px; border-radius: 6px; border: 1px dashed #57606f; }
-        .output-section p { font-size: 0.9rem; color: #00ff88; margin-bottom: 10px; }
         .code-box { width: 100%; height: 150px; background: #000; color: #00ff88; font-family: monospace; padding: 10px; border-radius: 4px; font-size: 0.85rem; }
         .btn-copy { background: #57606f; color: white; border: none; padding: 6px 12px; margin-top: 5px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
     </style>
@@ -46,22 +62,45 @@
     </header>
 
     <div class="container">
+        <!-- TOMBOL STRUKTUR FILTER -->
+        <div class="category-filter" id="filterContainer">
+            <button class="filter-btn active" onclick="filterPlatform('all', this)">Semua Game</button>
+            <button class="filter-btn" onclick="filterPlatform('steam', this)">Steam Game</button>
+            <button class="filter-btn" onclick="filterPlatform('mobile', this)">Mobile Game</button>
+            <!-- Platform baru yang Anda tambahkan via dashboard akan otomatis muncul tombol filternya di sini -->
+        </div>
+
         <div class="game-grid" id="gameGrid">
             
-            <!-- CONTOH KARTU GAME -->
-            <div class="game-card">
-                <img src="https://unsplash.com" class="game-img" alt="Game Cover">
+            <!-- CONTOH GAME STEAM -->
+            <div class="game-card" data-platform="steam">
+                <div class="card-img-wrapper">
+                    <img src="https://unsplash.com" class="game-img" alt="Game Cover">
+                    <span class="platform-badge">Steam</span>
+                </div>
                 <div class="game-info">
-                    <h2 class="game-title">Nama Game Pertama</h2>
-                    <p class="game-description">Tuliskan artikel atau deskripsi game pertama Anda di sini. Ceritakan alur cerita singkat, genre game, dan fitur-fitur seru yang ada di dalamnya.</p>
-                    <a href="https://google.com" target="_blank" class="game-link">Mainkan Sekarang</a>
+                    <h2 class="game-title">Contoh Game PC Hero</h2>
+                    <p class="game-description">Ini adalah contoh game yang dikategorikan untuk platform Steam / PC.</p>
+                    <a href="https://steampowered.com" target="_blank" class="game-link">Beli di Steam</a>
+                </div>
+            </div>
+
+            <!-- CONTOH GAME MOBILE -->
+            <div class="game-card" data-platform="mobile">
+                <div class="card-img-wrapper">
+                    <img src="https://unsplash.com" class="game-img" alt="Game Cover">
+                    <span class="platform-badge">Mobile</span>
+                </div>
+                <div class="game-info">
+                    <h2 class="game-title">Contoh Game Mobile RPG</h2>
+                    <p class="game-description">Ini adalah contoh game yang dikategorikan untuk perangkat Android atau iOS (Mobile Game).</p>
+                    <a href="https://google.com" target="_blank" class="game-link">Download di Play Store</a>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- TOMBOL KE DASHBOARD -->
     <button class="admin-trigger" onclick="toggleDashboard()">⚙️ Admin Dashboard</button>
 
     <!-- MODAL DASHBOARD -->
@@ -75,8 +114,18 @@
             </div>
 
             <div class="form-group">
+                <label>Pilih Platform / Kategori</label>
+                <select id="selectPlatform" onchange="checkCustomPlatform(this)">
+                    <option value="steam">Steam Game</option>
+                    <option value="mobile">Mobile Game</option>
+                    <option value="custom">+ Tambah Platform Baru...</option>
+                </select>
+                <input type="text" id="inputCustomPlatform" placeholder="Ketik nama platform baru (misal: PlayStation, Nintendo)" style="display:none; margin-top: 10px;">
+            </div>
+
+            <div class="form-group">
                 <label>Link Gambar / Banner Game</label>
-                <input type="text" id="inputImg" placeholder="Tempel link URL gambar (misal dari Imgur)...">
+                <input type="text" id="inputImg" placeholder="Tempel link URL gambar...">
             </div>
 
             <div class="form-group">
@@ -92,7 +141,7 @@
             <button class="btn-publish" onclick="publishGame()">🚀 Tambah & Publish</button>
 
             <div class="output-section" id="outputSection">
-                <p>✅ Berhasil! Ikuti langkah penyimpanan ini:</p>
+                <p>✅ Berhasil Ditambahkan! Ikuti langkah penyimpanan ini:</p>
                 <textarea class="code-box" id="codeOutput" readonly></textarea>
                 <button class="btn-copy" onclick="copyCode()">📋 Salin Seluruh Kode</button>
             </div>
@@ -100,60 +149,21 @@
     </div>
 
     <script>
-        function toggleDashboard() {
-            const dash = document.getElementById('dashboard');
-            dash.style.display = (dash.style.display === 'block') ? 'none' : 'block';
+        // Fungsi Filter Tampilan Game
+        function filterPlatform(platform, btn) {
+            // Ubah tombol aktif
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Sembunyikan/Tampilkan kartu game
+            const cards = document.querySelectorAll('.game-card');
+            cards.forEach(card => {
+                if (platform === 'all' || card.getAttribute('data-platform') === platform) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
-        function publishGame() {
-            const title = document.getElementById('inputTitle').value.trim();
-            const img = document.getElementById('inputImg').value.trim() || 'https://unsplash.com';
-            const desc = document.getElementById('inputDesc').value.trim();
-            const link = document.getElementById('inputLink').value.trim() || '#';
-
-            if(!title || !desc) {
-                alert('Nama Game dan Deskripsi wajib diisi!');
-                return;
-            }
-
-            const grid = document.getElementById('gameGrid');
-            const newCard = document.createElement('div');
-            newCard.className = 'game-card';
-            newCard.innerHTML = `
-                <img src="${img}" class="game-img" alt="${title}">
-                <div class="game-info">
-                    <h2 class="game-title">${title}</h2>
-                    <p class="game-description">${desc}</p>
-                    <a href="${link}" target="_blank" class="game-link">Mainkan Sekarang</a>
-                </div>
-            `;
-            grid.appendChild(newCard);
-
-            generateNewHTML();
-
-            document.getElementById('inputTitle').value = '';
-            document.getElementById('inputImg').value = '';
-            document.getElementById('inputDesc').value = '';
-            document.getElementById('inputLink').value = '';
-            
-            document.getElementById('outputSection').style.display = 'block';
-        }
-
-        function generateNewHTML() {
-            const docClone = document.documentElement.cloneNode(true);
-            docClone.querySelector('#outputSection').style.display = 'block';
-            docClone.querySelector('#dashboard').style.display = 'none';
-            
-            const finalCode = "<!DOCTYPE html>\n<html lang=\"id\">\n" + docClone.innerHTML + "\n</html>";
-            document.getElementById('codeOutput').value = finalCode;
-        }
-
-        function copyCode() {
-            const codeBox = document.getElementById('codeOutput');
-            codeBox.select();
-            navigator.clipboard.writeText(codeBox.value);
-            alert('Kode disalin! Tempelkan (overwrite) ke file index.html Anda di GitHub.');
-        }
-    </script>
-</body>
-</html>
