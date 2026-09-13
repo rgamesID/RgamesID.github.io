@@ -4,18 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RgamesID - Game Portfolio</title>
-    <style id="themeVariables">
-        :root {
-            --bg-image: none;
-            --steam-color: #ff4757;
-            --mobile-color: #ff4757;
-        }
-    </style>
+    <style id="dynamicStyles"></style>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
         body { 
             background-color: #121212; 
-            background-image: var(--bg-image);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -40,23 +33,11 @@
         .game-img { width: 100%; height: 100%; object-fit: cover; }
         .platform-badge { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.8); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
 
-        .game-card[data-platform="steam"] { border-color: var(--steam-color); }
-        .game-card[data-platform="steam"] .platform-badge { border: 1px solid var(--steam-color); color: var(--steam-color); }
-        .game-card[data-platform="steam"] .game-link { background-color: var(--steam-color); }
-        
-        .game-card[data-platform="mobile"] { border-color: var(--mobile-color); }
-        .game-card[data-platform="mobile"] .platform-badge { border: 1px solid var(--mobile-color); color: var(--mobile-color); }
-        .game-card[data-platform="mobile"] .game-link { background-color: var(--mobile-color); }
-
         .game-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
         .game-title { font-size: 1.5rem; margin-bottom: 10px; color: #ffffff; }
         .game-description { color: #ced6e0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; white-space: pre-line; }
         .game-link { display: inline-block; text-align: center; color: #ffffff; padding: 12px; text-decoration: none; font-weight: bold; border-radius: 6px; transition: 0.2s; filter: brightness(0.9); }
         .game-link:hover { filter: brightness(1.2); }
-        
-        /* TOMBOL MENU MENUJU HALAMAN ADMIN TERPISAH */
-        .admin-link { position: fixed; bottom: 20px; right: 20px; background: #2f3542; border: 1px solid #ff4757; color: #fff; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: 0.2s; }
-        .admin-link:hover { background: #ff4757; }
     </style>
 </head>
 <body>
@@ -74,45 +55,61 @@
             <button class="filter-btn" onclick="filterPlatform('mobile', this)">Mobile Game</button>
         </div>
 
+        <!-- GRID UTAMA -->
         <div class="game-grid" id="gameGrid">
-            <!-- DAFTAR GAME ANDA AKAN MUNCUL DI SINI SECARA BERURUTAN -->
-            <div class="game-card" data-platform="steam">
-                <div class="card-img-wrapper">
-                    <img src="https://unsplash.com" class="game-img" alt="Game Cover">
-                    <span class="platform-badge">Steam</span>
-                </div>
-                <div class="game-info">
-                    <h2 class="game-title">Contoh Game PC Hero</h2>
-                    <p class="game-description">Ini adalah contoh game yang dikategorikan untuk platform Steam / PC.</p>
-                    <a href="https://steampowered.com" target="_blank" class="game-link">Beli di Steam</a>
-                </div>
-            </div>
-
-            <div class="game-card" data-platform="mobile">
-                <div class="card-img-wrapper">
-                    <img src="https://unsplash.com" class="game-img" alt="Game Cover">
-                    <span class="platform-badge">Mobile</span>
-                </div>
-                <div class="game-info">
-                    <h2 class="game-title">Contoh Game Mobile RPG</h2>
-                    <p class="game-description">Ini adalah contoh game yang dikategorikan untuk perangkat Mobile Game.</p>
-                    <a href="https://google.com" target="_blank" class="game-link">Download di Play Store</a>
-                </div>
-            </div>
+            <!-- Data akan dimuat otomatis oleh JavaScript dari database.json -->
         </div>
     </div>
 
-    <!-- LINK PINDAH KE HALAMAN ADMIN -->
-    <a href="admin.html" class="admin-link">⚙️ Buka Admin Dashboard</a>
-
     <script>
+        // Ambil data otomatis dari file database.json tanpa lewat tombol admin macet
+        fetch('database.json')
+            .then(response => response.json())
+            .then(data => {
+                // 1. Set Kustomisasi Desain & Warna
+                var visual = data.pengaturan_visual;
+                document.body.style.backgroundImage = visual.gambar_background ? "url('" + visual.gambar_background + "')" : "none";
+                
+                var cssStyle = 
+                    ".game-card[data-platform='steam'] { border-color: " + visual.warna_tombol_steam + "; }\n" +
+                    ".game-card[data-platform='steam'] .platform-badge { border: 1px solid " + visual.warna_tombol_steam + "; color: " + visual.warna_tombol_steam + "; }\n" +
+                    ".game-card[data-platform='steam'] .game-link { background-color: " + visual.warna_tombol_steam + "; }\n" +
+                    ".game-card[data-platform='mobile'] { border-color: " + visual.warna_tombol_mobile + "; }\n" +
+                    ".game-card[data-platform='mobile'] .platform-badge { border: 1px solid " + visual.warna_tombol_mobile + "; color: " + visual.warna_tombol_mobile + "; }\n" +
+                    ".game-card[data-platform='mobile'] .game-link { background-color: " + visual.warna_tombol_mobile + "; }\n";
+                document.getElementById('dynamicStyles').innerHTML = cssStyle;
+
+                // 2. Render Kartu Game Secara Berurutan
+                var grid = document.getElementById('gameGrid');
+                grid.innerHTML = ""; // Bersihkan contoh data awal
+                
+                data.daftar_game.forEach(game => {
+                    var badgeLabel = game.platform === 'steam' ? 'Steam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
+                    var buttonText = game.platform === 'steam' ? 'Beli di Steam' : (game.platform === 'mobile' ? 'Download di Play Store' : 'Mainkan Sekarang');
+                    
+                    var cardHTML = 
+                        '<div class="game-card" data-platform="' + game.platform + '">' +
+                        '    <div class="card-img-wrapper">' +
+                        '        <img src="' + game.link_gambar + '" class="game-img" alt="' + game.judul + '">' +
+                        '        <span class="platform-badge">' + badgeLabel + '</span>' +
+                        '    </div>' +
+                        '    <div class="game-info">' +
+                        '        <h2 class="game-title">' + game.judul + '</h2>' +
+                        '        <p class="game-description">' + game.deskripsi + '</p>' +
+                        '        <a href="' + game.link_tujuan + '" target="_blank" class="game-link">' + buttonText + '</a>' +
+                        '    </div>' +
+                        '</div>';
+                    grid.innerHTML += cardHTML;
+                });
+            })
+            .catch(error => console.error("Gagal memuat database game:", error));
+
+        // Fungsi Filter Tombol Kategori
         function filterPlatform(platform, btn) {
-            var buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(function(b) { b.classList.remove('active'); });
+            document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
             btn.classList.add('active');
 
-            var cards = document.querySelectorAll('.game-card');
-            cards.forEach(function(card) {
+            document.querySelectorAll('.game-card').forEach(function(card) {
                 if (platform === 'all' || card.getAttribute('data-platform') === platform) {
                     card.style.display = 'flex';
                 } else {
