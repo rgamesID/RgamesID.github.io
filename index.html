@@ -84,9 +84,9 @@
                 
                 // DISINI ATURAN WARNA GARIS TEPI (BORDER) DAN BADGE DIKUNCI 100% MENGIKUTI WARNA TOMBOL DATABASE
                 var cssStyle = 
-                    ".game-card[data-platform='steam'] { border: 2px solid " + visual.warna_tombol_steam + " !important; }\n" +
-                    ".game-card[data-platform='steam'] .platform-badge { border: 1px solid " + visual.warna_tombol_steam + "; color: " + visual.warna_tombol_steam + "; }\n" +
-                    ".game-card[data-platform='steam'] .game-link { background-color: " + visual.warna_tombol_steam + "; }\n" +
+                    ".game-card[data-platform='PC Steam'] { border: 2px solid " + visual.warna_tombol_steam + " !important; }\n" +
+                    ".game-card[data-platform='PC Steam'] .platform-badge { border: 1px solid " + visual.warna_tombol_steam + "; color: " + visual.warna_tombol_steam + "; }\n" +
+                    ".game-card[data-platform='PC Steam'] .game-link { background-color: " + visual.warna_tombol_steam + "; }\n" +
                     ".game-card[data-platform='mobile'] { border: 2px solid " + visual.warna_tombol_mobile + " !important; }\n" +
                     ".game-card[data-platform='mobile'] .platform-badge { border: 1px solid " + visual.warna_tombol_mobile + "; color: " + visual.warna_tombol_mobile + "; }\n" +
                     ".game-card[data-platform='mobile'] .game-link { background-color: " + visual.warna_tombol_mobile + "; }\n";
@@ -96,8 +96,8 @@
                 grid.innerHTML = "";
                 
                 data.daftar_game.forEach(game => {
-                    var badgeLabel = game.platform === 'PC Steam' ? 'PCSteam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
-                    var buttonText = game.platform === 'PC Steam' ? 'Buy on Steam' : (game.platform === 'mobile' ? 'Get it on Play Store' : 'Play Now');
+                    var badgeLabel = game.platform === 'steam' ? 'steam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
+                    var buttonText = game.platform === 'steam' ? 'Buy on Steam' : (game.platform === 'mobile' ? 'Get it on Play Store' : 'Play Now');
                     
                     var cardHTML = 
                         '<div class="game-card" data-platform="' + game.platform + '">' +
