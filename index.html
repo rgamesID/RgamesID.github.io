@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,34 +8,51 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
         body { 
-            background-color: #121212; 
+            background-color: #ffffff; /* Mengubah background menjadi putih murni */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: #ffffff; 
+            color: #121212; /* Mengubah teks umum menjadi gelap agar kontras di latar putih */
             padding-bottom: 80px; 
         }
-        header { text-align: center; padding: 50px 20px 20px; background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); margin-bottom: 20px; }
-        header h1 { font-size: 2.8rem; color: #ff4757; margin-bottom: 10px; }
-        header p { color: #a4b0be; font-size: 1.1rem; }
+        header { 
+            text-align: center; 
+            padding: 50px 20px 20px; 
+            background: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(5px); 
+            margin-bottom: 20px; 
+        }
+        header h1 { 
+            font-size: 2.8rem; 
+            color: #d4af37; /* Mengubah tulisan RgamesID Studios menjadi Kuning Emas */
+            margin-bottom: 10px; 
+        }
+        header p { 
+            color: #4b4b4b; /* Mengubah sub-teks menjadi abu-abu gelap agar mudah dibaca */
+            font-size: 1.1rem; 
+        }
         
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
-        .category-filter { text-align: center; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; background: rgba(30,30,30,0.6); padding: 15px; border-radius: 50px; }
+        .category-filter { text-align: center; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; background: rgba(30,30,30,0.05); padding: 15px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); }
         .filter-btn { background: #2f3542; color: #fff; border: 1px solid #57606f; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; }
-        .filter-btn:hover, .filter-btn.active { background: #ff4757; border-color: #ff4757; }
+        
+        /* WARNA AKTIF TOMBOL FILTER SESUAI PLATFORM */
+        .category-filter button:nth-child(1).active { background: #747d8c !important; border-color: #747d8c !important; color: #fff; }
+        .category-filter button:nth-child(2).active { background: #0074e4 !important; border-color: #0074e4 !important; color: #fff; }
+        .category-filter button:nth-child(3).active { background: #ff4757 !important; border-color: #ff4757 !important; color: #fff; }
 
         .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
-        .game-card { background-color: rgba(30, 30, 30, 0.85); backdrop-filter: blur(10px); border: 1px solid #2f3542; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; }
-        .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(255, 71, 87, 0.15); }
+        .game-card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         
         .card-img-wrapper { position: relative; width: 100%; height: 180px; background-color: #2f3542; }
         .game-img { width: 100%; height: 100%; object-fit: cover; }
         .platform-badge { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.8); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
 
         .game-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
-        .game-title { font-size: 1.5rem; margin-bottom: 10px; color: #ffffff; }
-        .game-description { color: #ced6e0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; white-space: pre-line; }
+        .game-title { font-size: 1.5rem; margin-bottom: 10px; color: #121212; }
+        .game-description { color: #4b4b4b; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; white-space: pre-line; }
         .game-link { display: inline-block; text-align: center; color: #ffffff; padding: 12px; text-decoration: none; font-weight: bold; border-radius: 6px; transition: 0.2s; filter: brightness(0.9); }
         .game-link:hover { filter: brightness(1.2); }
     </style>
@@ -44,29 +61,27 @@
 
     <header>
         <h1>RgamesID Studios</h1>
-        <p>Mainkan koleksi game seru hasil karya kami langsung dari browser atau perangkat Anda!</p>
+        <p>Play our exciting collection of games directly from your browser or device!</p>
     </header>
 
     <div class="container">
-        <!-- FILTER KATEGORI -->
+        <!-- FILTER KATEGORI (BAHASA INGGRIS) -->
         <div class="category-filter" id="filterContainer">
-            <button class="filter-btn active" onclick="filterPlatform('all', this)">Semua Game</button>
-            <button class="filter-btn" onclick="filterPlatform('steam', this)">Steam Game</button>
-            <button class="filter-btn" onclick="filterPlatform('mobile', this)">Mobile Game</button>
+            <button class="filter-btn active" onclick="filterPlatform('all', this)">All Games</button>
+            <button class="filter-btn" onclick="filterPlatform('steam', this)">Steam Games</button>
+            <button class="filter-btn" onclick="filterPlatform('mobile', this)">Mobile Games</button>
         </div>
 
         <!-- GRID UTAMA -->
         <div class="game-grid" id="gameGrid">
-            <!-- Data akan dimuat otomatis oleh JavaScript dari database.json -->
+            <!-- Data dimuat otomatis dari database.json -->
         </div>
     </div>
 
     <script>
-        // Ambil data otomatis dari file database.json tanpa lewat tombol admin macet
         fetch('database.json')
             .then(response => response.json())
             .then(data => {
-                // 1. Set Kustomisasi Desain & Warna
                 var visual = data.pengaturan_visual;
                 document.body.style.backgroundImage = visual.gambar_background ? "url('" + visual.gambar_background + "')" : "none";
                 
@@ -79,13 +94,14 @@
                     ".game-card[data-platform='mobile'] .game-link { background-color: " + visual.warna_tombol_mobile + "; }\n";
                 document.getElementById('dynamicStyles').innerHTML = cssStyle;
 
-                // 2. Render Kartu Game Secara Berurutan
                 var grid = document.getElementById('gameGrid');
-                grid.innerHTML = ""; // Bersihkan contoh data awal
+                grid.innerHTML = "";
                 
                 data.daftar_game.forEach(game => {
                     var badgeLabel = game.platform === 'steam' ? 'Steam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
-                    var buttonText = game.platform === 'steam' ? 'Beli di Steam' : (game.platform === 'mobile' ? 'Download di Play Store' : 'Mainkan Sekarang');
+                    
+                    // TOMBOL AKSYON DIUBAH KE BAHASA INGGRIS
+                    var buttonText = game.platform === 'steam' ? 'Buy on Steam' : (game.platform === 'mobile' ? 'Get it on Play Store' : 'Play Now');
                     
                     var cardHTML = 
                         '<div class="game-card" data-platform="' + game.platform + '">' +
@@ -102,9 +118,8 @@
                     grid.innerHTML += cardHTML;
                 });
             })
-            .catch(error => console.error("Gagal memuat database game:", error));
+            .catch(error => console.error("Error loading game database:", error));
 
-        // Fungsi Filter Tombol Kategori
         function filterPlatform(platform, btn) {
             document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
             btn.classList.add('active');
