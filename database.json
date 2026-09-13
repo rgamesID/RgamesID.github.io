@@ -1,9 +1,10 @@
 {
-  "pengaturan_visual": {
+    "pengaturan_visual": {
     "gambar_background": "",
-    "warna_tombol_steam": "#ff4757",
-    "warna_tombol_mobile": "#2ed573"
+    "warna_tombol_steam": "#0074e4",
+    "warna_tombol_mobile": "#ff4757"
   },
+
   "daftar_game": [
     {
       "judul": "The Adventure of TED and the lost magic crystals",
