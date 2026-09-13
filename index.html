@@ -34,7 +34,7 @@
             font-size: 1.1rem; 
         }
         
-        /* TOMBOL PILIHAN BAHASA DI POJOK ATAS */
+        /* LANG SWITCHER */
         .lang-switcher {
             position: absolute;
             top: 15px;
@@ -60,16 +60,17 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
+        /* FILTERS */
         .category-filter { text-align: center; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; background: rgba(30,30,30,0.05); padding: 15px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); }
         .filter-btn { background: #2f3542; color: #fff; border: 1px solid #57606f; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; }
         
-        /* WARNA FILTER AKTIF SESUAI KATEGORI */
         .category-filter button:nth-child(1).active { background: #ff4757 !important; border-color: #ff4757 !important; color: #fff; }
         .category-filter button:nth-child(2).active { background: #0074e4 !important; border-color: #0074e4 !important; color: #fff; }
         .category-filter button:nth-child(3).active { background: #ff4757 !important; border-color: #ff4757 !important; color: #fff; }
 
+        /* GRID */
         .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
-        .game-card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .game-card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 15 rgba(0,0,0,0.05); }
         .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         
         .card-img-wrapper { position: relative; width: 100%; height: 180px; background-color: #2f3542; }
@@ -86,12 +87,10 @@
 <body>
 
     <header>
-        <!-- TOMBOL PILIH BAHASA -->
         <div class="lang-switcher">
             <button class="lang-btn active" id="btn-id" onclick="gantiBahasa('id')">ID</button>
             <button class="lang-btn" id="btn-en" onclick="gantiBahasa('en')">EN</button>
         </div>
-        
         <h1 id="site-title">RgamesID Studios</h1>
         <p id="site-sub">Mainkan koleksi game seru hasil karya kami langsung dari browser atau perangkat Anda!</p>
     </header>
@@ -102,15 +101,13 @@
             <button class="filter-btn" id="btn-steam-games" onclick="filterPlatform('steam', this)">Steam Game</button>
             <button class="filter-btn" id="btn-mobile-games" onclick="filterPlatform('mobile', this)">Mobile Game</button>
         </div>
-
         <div class="game-grid" id="gameGrid"></div>
     </div>
 
     <script>
         var databaseLokal = null;
-        var bahasaAktif = 'id'; // Bahasa bawaan awal saat web dibuka
+        var bahasaAktif = 'id';
 
-        // Teks statis pelengkap translasi halaman utama
         var teksStatis = {
             id: {
                 sub: "Mainkan koleksi game seru hasil karya kami langsung dari browser atau perangkat Anda!",
@@ -128,15 +125,17 @@
             }
         };
 
-        // Ambil data dari JSON
         fetch('database.json')
-            .then(response => response.json())
-            .then(data => {
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
                 databaseLokal = data;
-                
-                // Set visual background dan warna tombol platform
                 var visual = data.pengaturan_visual;
-                document.body.style.backgroundImage = visual.gambar_background ? "url('" + visual.gambar_background + "')" : "none";
+                
+                if (visual.gambar_background) {
+                    document.body.style.backgroundImage = "url('" + visual.gambar_background + "')";
+                } else {
+                    document.body.style.backgroundImage = "none";
+                }
                 
                 var cssStyle = 
                     ".game-card[data-platform='steam'] { border-color: " + visual.warna_tombol_steam + "; }\n" +
@@ -147,27 +146,24 @@
                     ".game-card[data-platform='mobile'] .game-link { background-color: " + visual.warna_tombol_mobile + "; }\n";
                 document.getElementById('dynamicStyles').innerHTML = cssStyle;
 
-                // Render halaman pertama kali
                 renderHalaman();
             });
 
         function renderHalaman() {
             if(!databaseLokal) return;
 
-            // 1. Ubah teks teks umum di Header & Filter
             document.getElementById('site-sub').innerText = teksStatis[bahasaAktif].sub;
             document.getElementById('btn-all-games').innerText = teksStatis[bahasaAktif].filterAll;
 
-            // 2. Render Ulang Kartu Game berdasarkan bahasa terpilih
             var grid = document.getElementById('gameGrid');
             grid.innerHTML = ""; 
             
-            databaseLokal.daftar_game.forEach(game => {
-                var judul = bahasaAktif === 'id' ? game.judul_id : game.judul_en;
-                var deskripsi = bahasaAktif === 'id' ? game.deskripsi_id : game.deskripsi_en;
+            databaseLokal.daftar_game.forEach(function(game) {
+                var judul = (bahasaAktif === 'id') ? game.judul_id : game.judul_en;
+                var deskripsi = (bahasaAktif === 'id') ? game.deskripsi_id : game.deskripsi_en;
                 
-                var badgeLabel = game.platform === 'steam' ? 'Steam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
-                var buttonText = game.platform === 'steam' ? teksStatis[bahasaAktif].btnSteam : (game.platform === 'mobile' ? teksStatis[bahasaAktif].btnMobile : teksStatis[bahasaAktif].btnCustom);
+                var badgeLabel = (game.platform === 'steam') ? 'Steam' : ((game.platform === 'mobile') ? 'Mobile' : game.platform.toUpperCase());
+                var buttonText = (game.platform === 'steam') ? teksStatis[bahasaAktif].btnSteam : ((game.platform === 'mobile') ? teksStatis[bahasaAktif].btnMobile : teksStatis[bahasaAktif].btnCustom);
                 
                 var cardHTML = 
                     '<div class="game-card" data-platform="' + game.platform + '">' +
@@ -185,14 +181,18 @@
             });
         }
 
-        // Fungsi ketika tombol ID atau EN diklik
         function gantiBahasa(lang) {
             bahasaAktif = lang;
             document.getElementById('btn-id').classList.remove('active');
             document.getElementById('btn-en').classList.remove('active');
             document.getElementById('btn-' + lang).classList.add('active');
-            
             renderHalaman();
         }
 
         function filterPlatform(platform, btn) {
+            var buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+
+            var cards = document.querySelectorAll('.game-card');
+            cards.forEach(function(card) {
