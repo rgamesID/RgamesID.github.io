@@ -18,7 +18,7 @@
         header { 
             text-align: center; 
             padding: 50px 20px 20px; 
-            background: rgba(0, 0, 0, 0.8); 
+            background: rgba(0, 0,0, 0.8); 
             backdrop-filter: blur(5px); 
             margin-bottom: 20px; 
         }
@@ -34,79 +34,12 @@
         
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
-        .category-filter { text-align: center; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; background: rgba(30,30,30,0.05); padding: 15px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); align-items: center; }
-        .filter-btn { background: #2f3542; color: #fff; border: 1px solid #57606f; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; font-size: 0.95rem; }
+        .category-filter { text-align: center; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; background: rgba(30,30,30,0.05); padding: 15px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); }
+        .filter-btn { background: #2f3542; color: #fff; border: 1px solid #57606f; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; }
         
         .category-filter button:nth-child(1).active { background: #747d8c !important; border-color: #747d8c !important; color: #fff; }
         .category-filter button:nth-child(2).active { background: #0074e4 !important; border-color: #0074e4 !important; color: #fff; }
         .category-filter button:nth-child(3).active { background: #00875a !important; border-color: #00875a !important; color: #fff; }
-
-        /* ========================================================
-           STYLE UNTUK DROPDOWN PRIVACY POLICY (TEMA GELAP PORTFOLIO)
-           ======================================================== */
-        .privacy-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-btn {
-            background: #1e1e1e;
-            color: #FFD000;
-            border: 1px solid #FFD000;
-            padding: 8px 18px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.2s;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .dropdown-btn:hover {
-            background: #FFD000;
-            color: #121212;
-        }
-        .arrow {
-            font-size: 0.7rem;
-            transition: transform 0.2s;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            min-width: 240px;
-            box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
-            border: 1px solid #444;
-            border-radius: 8px;
-            z-index: 999;
-            margin-top: 8px;
-            overflow: hidden;
-            text-align: left;
-        }
-        .dropdown-content a {
-            color: #ffffff;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: 0.2s;
-        }
-        .dropdown-content a:last-child {
-            border-bottom: none;
-        }
-        .dropdown-content a:hover {
-            background-color: rgba(255, 208, 0, 0.2);
-            color: #FFD000;
-            padding-left: 20px;
-        }
-        .show-dropdown {
-            display: block !important;
-        }
-        /* ======================================================== */
 
         .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
         
@@ -137,22 +70,6 @@
             <button class="filter-btn active" onclick="filterPlatform('all', this)">All Games</button>
             <button class="filter-btn" onclick="filterPlatform('steam', this)">PC Steam Games</button>
             <button class="filter-btn" onclick="filterPlatform('mobile', this)">Mobile Games</button>
-            
-            <!-- MENU DROPDOWN INTERAKTIF PRIVACY POLICY -->
-            <div class="privacy-dropdown">
-                <button class="dropdown-btn" onclick="toggleDropdown(event)">
-                    Privacy Policy <span class="arrow">&#9662;</span>
-                </button>
-                <div id="privacyMenu" class="dropdown-content">
-                    <a href="privacy-policy.html">General Privacy Policy</a>
-                    <a href="privacy-ted-squirrel.html">TED Squirrel Adventure</a>
-                    <a href="privacy-bang-petrux.html">Bang Petrux: Teror Babi Ngepet</a>
-                    
-                    <!-- CARA MENAMBAH GAME BARU DI MASA DEPAN: -->
-                    <!-- Cukup salin/buat baris kode HTML baru seperti contoh di bawah ini -->
-                    <!-- <a href="privacy-game-baru.html">Nama Game Baru Anda</a> -->
-                </div>
-            </div>
         </div>
 
         <div class="game-grid" id="gameGrid"></div>
@@ -197,3 +114,20 @@
                     grid.innerHTML += cardHTML;
                 });
             })
+            .catch(error => console.error("Error loading game database:", error));
+
+        function filterPlatform(platform, btn) {
+            document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+
+            document.querySelectorAll('.game-card').forEach(function(card) {
+                if (platform === 'all' || card.getAttribute('data-platform') === platform) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
