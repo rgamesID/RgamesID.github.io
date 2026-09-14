@@ -142,13 +142,17 @@
                 var visual = data.pengaturan_visual;
                 document.body.style.backgroundImage = visual.gambar_background ? "url('" + visual.gambar_background + "')" : "none";
                 
+                               // PENGATURAN WARNA BORDER DAN FONT KHUSUS STEAM GAME CARD
                 var cssStyle = 
-                    ".game-card[data-platform='steam'] { border: 2px solid " + visual.warna_tombol_steam + " !important; }\n" +
+                    ".game-card[data-platform='steam'] { border: 3px solid " + visual.warna_tombol_steam + " !important; }\n" +
+                    ".game-card[data-platform='steam'] .game-title { color: " + visual.warna_tombol_steam + " !important; }\n" +
+                    ".game-card[data-platform='steam'] .game-description { color: #2c3e50 !important; }\n" +
                     ".game-card[data-platform='steam'] .platform-badge { border: 1px solid " + visual.warna_tombol_steam + "; color: " + visual.warna_tombol_steam + "; }\n" +
                     ".game-card[data-platform='steam'] .game-link { background-color: " + visual.warna_tombol_steam + "; }\n" +
                     ".game-card[data-platform='mobile'] { border: 2px solid " + visual.warna_tombol_mobile + " !important; }\n" +
                     ".game-card[data-platform='mobile'] .platform-badge { border: 1px solid " + visual.warna_tombol_mobile + "; color: " + visual.warna_tombol_mobile + "; }\n" +
                     ".game-card[data-platform='mobile'] .game-link { background-color: " + visual.warna_tombol_mobile + "; }\n";
+
                 document.getElementById('dynamicStyles').innerHTML = cssStyle;
 
                 var grid = document.getElementById('gameGrid');
