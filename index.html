@@ -176,8 +176,9 @@
                     grid.innerHTML += cardHTML;
 
                     // Menggunakan baris kode pilihan Anda
-                    var linkPolicy = game.judul + " Privacy Policy.html";
-                    var optionHTML = '<a href="' + linkPolicy + '">' + game.judul + ' Policy</a>';
+                    var namaFileFisik = game.judul + " Privacy Policy.html";
+                    var linkAman = encodeURIComponent(namaFileFisik);
+                    var optionHTML = '<a href="' + linkAman + '">' + game.judul + ' Policy</a>';
                     dropdown.innerHTML += optionHTML;
                 });
             })
