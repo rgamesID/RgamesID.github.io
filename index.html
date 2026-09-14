@@ -8,32 +8,91 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
         body { 
-            background-color: #262626; 
+            background-color: #ffffff; 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: #121212; 
             padding-bottom: 80px; 
         }
+        
+        /* HEADER DENGAN NAVIGASI PRIVACY POLICY */
         header { 
             text-align: center; 
-            padding: 50px 20px 20px; 
-            background: rgba(0, 0,0, 0.8); 
+            padding: 60px 20px 20px; 
+            background: rgba(255, 255, 255, 0.8); 
             backdrop-filter: blur(5px); 
             margin-bottom: 20px; 
+            position: relative;
         }
         header h1 { 
             font-size: 2.8rem; 
-            color: #FFD000; 
+            color: #d4af37; /* Judul Utama Kuning Emas */
             margin-bottom: 10px; 
         }
         header p { 
-            color: #cbf5f3; 
+            color: #4b4b4b; 
             font-size: 1.1rem; 
         }
         
+        /* STYLE DROPDOWN PRIVACY POLICY DI POJOK ATAS */
+        .nav-container {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            display: inline-block;
+            z-index: 100;
+        }
+        .dropdown-btn {
+            background: #2f3542;
+            color: #ffffff;
+            border: 1px solid #d4af37;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .dropdown-btn:hover {
+            background: #d4af37;
+            color: #121212;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #ffffff;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        .dropdown-content a {
+            color: #2f3542;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #f1f2f6;
+            transition: 0.2s;
+        }
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f2f6;
+            color: #d4af37;
+        }
+        .nav-container:hover .dropdown-content {
+            display: block;
+        }
+
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
+        /* FILTERS */
         .category-filter { text-align: center; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; background: rgba(30,30,30,0.05); padding: 15px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); }
         .filter-btn { background: #2f3542; color: #fff; border: 1px solid #57606f; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; }
         
@@ -41,15 +100,14 @@
         .category-filter button:nth-child(2).active { background: #0074e4 !important; border-color: #0074e4 !important; color: #fff; }
         .category-filter button:nth-child(3).active { background: #00875a !important; border-color: #00875a !important; color: #fff; }
 
+        /* GRID */
         .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
-        
-        /* BASE STYLE KARTU GAME */
         .game-card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         
         .card-img-wrapper { position: relative; width: 100%; height: 180px; background-color: #2f3542; }
         .game-img { width: 100%; height: 100%; object-fit: cover; }
-        .platform-badge { position: absolute; top: 12px; right: 12px; background: #000000; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+        .platform-badge { position: absolute; top: 12px; right: 12px; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; background: #ffffff; color: #121212; }
 
         .game-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
         .game-title { font-size: 1.5rem; margin-bottom: 10px; color: #121212; }
@@ -61,14 +119,22 @@
 <body>
 
     <header>
+        <!-- MENU DROPDOWN PRIVACY POLICY -->
+        <div class="nav-container">
+            <button class="dropdown-btn">🛡️ Privacy Policy ▾</button>
+            <div class="dropdown-content" id="privacyDropdown">
+                <!-- Judul game dan link policy akan diisi otomatis di sini oleh JavaScript -->
+            </div>
+        </div>
+        
         <h1>RgamesID Studios</h1>
-        <p>Play our collection on multiple gaming platforms</p>
+        <p>Play our exciting collection of games directly from your browser or device!</p>
     </header>
 
     <div class="container">
         <div class="category-filter" id="filterContainer">
             <button class="filter-btn active" onclick="filterPlatform('all', this)">All Games</button>
-            <button class="filter-btn" onclick="filterPlatform('steam', this)">PC Steam Games</button>
+            <button class="filter-btn" onclick="filterPlatform('steam', this)">Steam Games</button>
             <button class="filter-btn" onclick="filterPlatform('mobile', this)">Mobile Games</button>
         </div>
 
@@ -82,7 +148,7 @@
                 var visual = data.pengaturan_visual;
                 document.body.style.backgroundImage = visual.gambar_background ? "url('" + visual.gambar_background + "')" : "none";
                 
-                // DISINI ATURAN WARNA GARIS TEPI (BORDER) DAN BADGE DIKUNCI 100% MENGIKUTI WARNA TOMBOL DATABASE
+                // Warna Dinamis untuk Tombol & Garis Tepi Game Card (Kunci Platform)
                 var cssStyle = 
                     ".game-card[data-platform='steam'] { border: 2px solid " + visual.warna_tombol_steam + " !important; }\n" +
                     ".game-card[data-platform='steam'] .platform-badge { border: 1px solid " + visual.warna_tombol_steam + "; color: " + visual.warna_tombol_steam + "; }\n" +
@@ -93,12 +159,16 @@
                 document.getElementById('dynamicStyles').innerHTML = cssStyle;
 
                 var grid = document.getElementById('gameGrid');
+                var dropdown = document.getElementById('privacyDropdown');
+                
                 grid.innerHTML = "";
+                dropdown.innerHTML = ""; // Bersihkan dropdown awal
                 
                 data.daftar_game.forEach(game => {
-                    var badgeLabel = game.platform === 'steam' ? 'PC Steam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
+                    var badgeLabel = game.platform === 'steam' ? 'Steam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
                     var buttonText = game.platform === 'steam' ? 'Buy on Steam' : (game.platform === 'mobile' ? 'Get it on Play Store' : 'Play Now');
                     
+                    // 1. Render Tampilan Kartu Game Ke Grid Utama
                     var cardHTML = 
                         '<div class="game-card" data-platform="' + game.platform + '">' +
                         '    <div class="card-img-wrapper">' +
@@ -112,11 +182,17 @@
                         '    </div>' +
                         '</div>';
                     grid.innerHTML += cardHTML;
+
+                    // 2. Mengisi Menu Dropdown Privacy Policy Secara Otomatis
+                    // Mengarahkan ke file kebijakan privasi lokal di GitHub (misal: Bro Petrux Privacy Policy.html)
+                    var linkPolicy = game.judul.replace(/\s+/g, '%20') + "%20Privacy%20Policy.html";
+                    var optionHTML = '<a href="' + linkPolicy + '">' + game.judul + ' Policy</a>';
+                    dropdown.innerHTML += optionHTML;
                 });
             })
             .catch(error => console.error("Error loading game database:", error));
 
-        function filterPlatform(platform, btn) {
+      function filterPlatform(platform, btn) {
             document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
             btn.classList.add('active');
 
@@ -131,3 +207,4 @@
     </script>
 </body>
 </html>
+
