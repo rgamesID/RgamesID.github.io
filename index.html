@@ -16,7 +16,6 @@
             padding-bottom: 80px; 
         }
         
-        /* HEADER DENGAN NAVIGASI PRIVACY POLICY */
         header { 
             text-align: center; 
             padding: 60px 20px 20px; 
@@ -27,7 +26,7 @@
         }
         header h1 { 
             font-size: 2.8rem; 
-            color: #d4af37; /* Judul Utama Kuning Emas */
+            color: #d4af37; 
             margin-bottom: 10px; 
         }
         header p { 
@@ -35,7 +34,7 @@
             font-size: 1.1rem; 
         }
         
-        /* STYLE DROPDOWN PRIVACY POLICY DI POJOK ATAS */
+        /* DROPDOWN PRIVACY POLICY */
         .nav-container {
             position: absolute;
             top: 15px;
@@ -92,7 +91,6 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
-        /* FILTERS */
         .category-filter { text-align: center; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; background: rgba(30,30,30,0.05); padding: 15px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); }
         .filter-btn { background: #2f3542; color: #fff; border: 1px solid #57606f; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; }
         
@@ -100,7 +98,6 @@
         .category-filter button:nth-child(2).active { background: #0074e4 !important; border-color: #0074e4 !important; color: #fff; }
         .category-filter button:nth-child(3).active { background: #00875a !important; border-color: #00875a !important; color: #fff; }
 
-        /* GRID */
         .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
         .game-card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
@@ -119,12 +116,9 @@
 <body>
 
     <header>
-        <!-- MENU DROPDOWN PRIVACY POLICY -->
         <div class="nav-container">
             <button class="dropdown-btn">🛡️ Privacy Policy ▾</button>
-            <div class="dropdown-content" id="privacyDropdown">
-                <!-- Judul game dan link policy akan diisi otomatis di sini oleh JavaScript -->
-            </div>
+            <div class="dropdown-content" id="privacyDropdown"></div>
         </div>
         
         <h1>RgamesID Studios</h1>
@@ -148,7 +142,6 @@
                 var visual = data.pengaturan_visual;
                 document.body.style.backgroundImage = visual.gambar_background ? "url('" + visual.gambar_background + "')" : "none";
                 
-                // Warna Dinamis untuk Tombol & Garis Tepi Game Card (Kunci Platform)
                 var cssStyle = 
                     ".game-card[data-platform='steam'] { border: 2px solid " + visual.warna_tombol_steam + " !important; }\n" +
                     ".game-card[data-platform='steam'] .platform-badge { border: 1px solid " + visual.warna_tombol_steam + "; color: " + visual.warna_tombol_steam + "; }\n" +
@@ -162,13 +155,12 @@
                 var dropdown = document.getElementById('privacyDropdown');
                 
                 grid.innerHTML = "";
-                dropdown.innerHTML = ""; // Bersihkan dropdown awal
+                dropdown.innerHTML = "";
                 
                 data.daftar_game.forEach(game => {
                     var badgeLabel = game.platform === 'steam' ? 'Steam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
                     var buttonText = game.platform === 'steam' ? 'Buy on Steam' : (game.platform === 'mobile' ? 'Get it on Play Store' : 'Play Now');
                     
-                    // 1. Render Tampilan Kartu Game Ke Grid Utama
                     var cardHTML = 
                         '<div class="game-card" data-platform="' + game.platform + '">' +
                         '    <div class="card-img-wrapper">' +
@@ -183,9 +175,7 @@
                         '</div>';
                     grid.innerHTML += cardHTML;
 
-                    // 2. Mengisi Menu Dropdown Privacy Policy Secara Otomatis
-                    // Mengarahkan ke file kebijakan privasi lokal di GitHub (misal: Bro Petrux Privacy Policy.html)
-                 // Baris baru yang sudah diperbaiki total
+                    // Menggunakan baris kode pilihan Anda
                     var linkPolicy = game.judul + " Privacy Policy.html";
                     var optionHTML = '<a href="' + linkPolicy + '">' + game.judul + ' Policy</a>';
                     dropdown.innerHTML += optionHTML;
@@ -193,7 +183,7 @@
             })
             .catch(error => console.error("Error loading game database:", error));
 
-      function filterPlatform(platform, btn) {
+        function filterPlatform(platform, btn) {
             document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
             btn.classList.add('active');
 
@@ -208,4 +198,3 @@
     </script>
 </body>
 </html>
-
