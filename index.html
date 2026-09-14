@@ -185,7 +185,9 @@
 
                     // 2. Mengisi Menu Dropdown Privacy Policy Secara Otomatis
                     // Mengarahkan ke file kebijakan privasi lokal di GitHub (misal: Bro Petrux Privacy Policy.html)
-                    var linkPolicy = game.judul.replace(/\s+/g, '%20') + "%20Privacy%20Policy.html";
+                 // Baris baru yang sudah diperbaiki total
+                var namaGame = game.judul.trim();
+                var linkPolicy = namaGame + " Privacy Policy.html";
                     var optionHTML = '<a href="' + linkPolicy + '">' + game.judul + ' Policy</a>';
                     dropdown.innerHTML += optionHTML;
                 });
