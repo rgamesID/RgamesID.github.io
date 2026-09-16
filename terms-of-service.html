@@ -1,134 +1,468 @@
+```html
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service & Privacy Policy - Bang Petrux</title>
+
+    <title>Terms of Service - RgamesID</title>
+
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --text-color: #333333;
-            --bg-color: #f9f9f9;
-            --card-bg: #ffffff;
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
             margin: 0;
             padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f5f5;
+            color: #222;
+            line-height: 1.7;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 40px auto;
-            padding: 20px;
-        }
-
-        .card {
-            background: var(--card-bg);
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         h1 {
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 10px;
-            font-size: 28px;
             margin-top: 0;
+            font-size: 32px;
+            color: #111;
         }
 
         h2 {
-            color: var(--primary-color);
-            font-size: 20px;
-            margin-top: 30px;
-            border-bottom: 1px solid #eeeeee;
-            padding-bottom: 5px;
+            margin-top: 35px;
+            font-size: 22px;
+            color: #222;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
         }
 
-        p, li {
-            font-size: 15px;
-            color: #555555;
+        h3 {
+            margin-top: 25px;
+            font-size: 18px;
+        }
+
+        p {
+            margin: 12px 0;
         }
 
         ul {
-            padding-left: 20px;
+            padding-left: 25px;
         }
 
         li {
             margin-bottom: 8px;
         }
 
-        .meta-date {
-            font-style: italic;
-            color: #7f8c8d;
+        .date {
+            color: #666;
             font-size: 14px;
             margin-bottom: 30px;
         }
 
+        .notice {
+            background: #f0f4f8;
+            padding: 18px;
+            border-left: 4px solid #555;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
         .footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 13px;
-            color: #7f8c8d;
+            margin-top: 45px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 14px;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
 
         @media (max-width: 600px) {
             .container {
-                margin: 10px;
-                padding: 10px;
+                margin: 0;
+                padding: 25px 20px;
+                border-radius: 0;
             }
-            .card {
-                padding: 20px;
-            }
+
             h1 {
-                font-size: 22px;
+                font-size: 27px;
+            }
+
+            h2 {
+                font-size: 20px;
             }
         }
     </style>
 </head>
+
 <body>
 
 <div class="container">
-    <div class="card">
-        <h1>Ketentuan Layanan & Kebijakan Privasi</h1>
-        <div class="meta-date">Terakhir diperbarui: September 2026</div>
 
-        <p>Selamat datang di <strong>BANG PETRUX Teror babi ngepet</strong> (selanjutnya disebut "Aplikasi"), sebuah game komersial yang dikembangkan oleh <strong>RgamesID</strong>. Dengan mengunduh atau menggunakan Aplikasi ini, Anda secara otomatis menyetujui ketentuan-ketentuan di bawah ini.</p>
+    <h1>Terms of Service</h1>
 
-        <h2>1. Ketentuan Penggunaan Layanan</h2>
-        <ul>
-            <li><strong>Lisensi Penggunaan:</strong> Aplikasi ini disediakan untuk Anda gunakan "apa adanya" (<em>as is</em>) untuk tujuan hiburan pribadi non-komersial.</li>
-            <li><strong>Fitur & Pembelian:</strong> Aplikasi ini gratis untuk diunduh namun mengandung iklan pihak ketiga serta menawarkan opsi pembelian dalam aplikasi (<em>in-app purchases</em>).</li>
-            <li><strong>Batasan Modifikasi:</strong> Anda dilarang keras menyalin, memodifikasi, meretas, membongkar kode sumber (<em>reverse engineer</em>), atau mendistribusikan ulang aset game ini tanpa izin tertulis dari RgamesID.</li>
-        </ul>
-
-        <h2>2. Kebijakan Data & Privasi</h2>
-        <ul>
-            <li><strong>Penyimpanan Lokal:</strong> Informasi atau progres game yang memerlukan identifikasi data disimpan secara lokal langsung di dalam memori perangkat Anda. Pengembang tidak mengumpulkan data tersebut di server eksternal.</li>
-            <li><strong>Layanan Pihak Ketiga:</strong> Aplikasi ini terintegrasi dengan layanan pihak ketiga seperti <em>Google Play Services</em> dan jaringan periklanan yang dapat mengumpulkan informasi tertentu untuk kebutuhan analitik, performa, dan personalisasi iklan.</li>
-            <li><strong>Data Log & Crash:</strong> Jika terjadi galat (<em>error/crash</em>), data teknis berupa alamat IP perangkat, nama perangkat, versi OS, dan waktu kejadian dapat dikumpulkan secara otomatis untuk membantu pengembang memperbaiki masalah.</li>
-        </ul>
-
-        <h2>3. Hak Kekayaan Intelektual</h2>
-        <p>Seluruh karakter "Bang Petrux", desain grafis, animasi, efek suara, musik, dan kode pemrograman merupakan hak milik sah dan eksklusif dari <strong>RgamesID</strong> serta dilindungi oleh hukum hak cipta yang berlaku.</p>
-
-        <h2>4. Perubahan Ketentuan</h2>
-        <p>Pengembang berhak memperbarui Ketentuan Layanan ini sewaktu-waktu. Anda disarankan untuk memeriksa halaman ini secara berkala untuk mengetahui perubahan terbaru.</p>
-
-        <h2>5. Kontak & Dukungan</h2>
-        <p>Jika Anda memiliki pertanyaan seputar ketentuan layanan ini atau ingin mengajukan keluhan terkait performa aplikasi, Anda dapat menghubungi pengembang melalui saluran resmi yang tersedia di platform distribusi aplikasi resmi (Google Play Store).</p>
+    <div class="date">
+        Last Updated: September 16, 2026
     </div>
+
+    <p>
+        Welcome to RgamesID. These Terms of Service ("Terms") govern your
+        access to and use of games, applications, websites, and related
+        services provided by RgamesID ("we", "us", or "our").
+    </p>
+
+    <p>
+        By downloading, installing, accessing, or using our applications or
+        games, you agree to be bound by these Terms. If you do not agree
+        with these Terms, please do not use our services.
+    </p>
+
+
+    <h2>1. About RgamesID</h2>
+
+    <p>
+        RgamesID is an independent game developer and publisher that creates
+        and distributes games and related digital content for supported
+        platforms.
+    </p>
+
+    <p>
+        Our applications may be distributed through third-party platforms,
+        including Google Play and other digital distribution services.
+    </p>
+
+
+    <h2>2. Use of Our Services</h2>
+
+    <p>
+        You may use our games and applications for personal and
+        non-commercial entertainment purposes, subject to these Terms and
+        the applicable rules of the platform through which the application
+        is distributed.
+    </p>
+
+    <p>You agree not to:</p>
+
+    <ul>
+        <li>Modify, reverse engineer, decompile, or disassemble our applications.</li>
+        <li>Attempt to gain unauthorized access to our servers or services.</li>
+        <li>Use cheats, exploits, hacks, bots, or unauthorized third-party software.</li>
+        <li>Copy, redistribute, sell, or commercially exploit our games or digital content without permission.</li>
+        <li>Interfere with the normal operation or security of our applications.</li>
+        <li>Use our services for unlawful purposes.</li>
+    </ul>
+
+
+    <h2>3. Accounts and User IDs</h2>
+
+    <p>
+        Certain features of our games may use platform-based authentication
+        or gaming services, such as Google Play Games.
+    </p>
+
+    <p>
+        These services may provide or process a user identifier associated
+        with your gaming account. User IDs may be used to support features
+        such as saved progress, achievements, leaderboards, or other
+        game-related functionality.
+    </p>
+
+    <p>
+        Your use of third-party account services is also subject to the
+        applicable terms and policies of those service providers.
+    </p>
+
+
+    <h2>4. Game Progress and Virtual Items</h2>
+
+    <p>
+        Our games may include virtual currencies, virtual items,
+        achievements, skins, customization items, or other digital content.
+    </p>
+
+    <p>
+        Virtual items and currencies have no real-world monetary value and
+        cannot be exchanged for cash unless explicitly stated otherwise.
+    </p>
+
+    <p>
+        Game progress, virtual currency, and other game data may be stored
+        locally on your device or through supported third-party services.
+    </p>
+
+    <p>
+        We cannot guarantee that game progress or virtual items will always
+        be preserved, particularly following device changes, application
+        deletion, technical failures, platform changes, or other unforeseen
+        circumstances.
+    </p>
+
+
+    <h2>5. In-App Purchases</h2>
+
+    <p>
+        Some of our applications may offer optional in-app purchases.
+        Purchases may include virtual currency, digital items,
+        advertisements removal, or other digital content.
+    </p>
+
+    <p>
+        Payments and purchase processing are handled through the applicable
+        platform's payment system, such as Google Play Billing.
+    </p>
+
+    <p>
+        We do not directly process or store your complete payment card,
+        bank account, or other financial payment credentials.
+    </p>
+
+    <p>
+        Purchase history may be processed by the applicable platform and
+        associated services in order to provide and manage purchases.
+    </p>
+
+    <p>
+        Refunds are subject to the refund policies and procedures of the
+        platform through which the purchase was made.
+    </p>
+
+
+    <h2>6. Advertising</h2>
+
+    <p>
+        Some of our applications may display advertisements provided by
+        third-party advertising services, including Google AdMob.
+    </p>
+
+    <p>
+        Advertising services may process information such as device or
+        other identifiers and information related to app activity in order
+        to provide, measure, and improve advertising services.
+    </p>
+
+    <p>
+        Third-party advertising services operate according to their own
+        privacy policies and terms.
+    </p>
+
+
+    <h2>7. Data and Privacy</h2>
+
+    <p>
+        Our applications may collect or share certain information required
+        to operate, maintain, analyze, and improve the services.
+    </p>
+
+    <h3>Information That May Be Collected</h3>
+
+    <ul>
+        <li>Device or other identifiers.</li>
+        <li>User IDs.</li>
+        <li>App interactions and other app activity.</li>
+        <li>Purchase history.</li>
+        <li>Crash logs.</li>
+        <li>Diagnostics and app performance information.</li>
+    </ul>
+
+    <h3>Information That May Be Shared</h3>
+
+    <ul>
+        <li>Device or other identifiers.</li>
+        <li>App interactions and other app activity.</li>
+        <li>Purchase history.</li>
+        <li>Crash logs and diagnostic information.</li>
+    </ul>
+
+    <div class="notice">
+        <strong>Important:</strong>
+        Data practices may vary depending on the application version,
+        platform, region, device, and applicable services.
+    </div>
+
+    <p>
+        For more information about how personal information is handled,
+        please refer to our Privacy Policy.
+    </p>
+
+
+    <h2>8. Third-Party Services</h2>
+
+    <p>
+        Our applications may integrate with third-party services to provide
+        advertising, authentication, achievements, analytics, payments,
+        crash reporting, or other functionality.
+    </p>
+
+    <p>Examples may include:</p>
+
+    <ul>
+        <li>Google Play Services</li>
+        <li>Google Play Games Services</li>
+        <li>Google Play Billing</li>
+        <li>Google AdMob</li>
+        <li>Other services required for application functionality</li>
+    </ul>
+
+    <p>
+        Your use of third-party services may be subject to their respective
+        terms of service and privacy policies.
+    </p>
+
+
+    <h2>9. Security</h2>
+
+    <p>
+        We take reasonable measures to maintain the operation and integrity
+        of our applications and services.
+    </p>
+
+    <p>
+        However, no electronic transmission, storage system, or internet
+        service can be guaranteed to be completely secure.
+    </p>
+
+    <p>
+        By using our services, you acknowledge that the transmission and
+        processing of information through third-party platforms may involve
+        risks outside our direct control.
+    </p>
+
+
+    <h2>10. Availability and Changes</h2>
+
+    <p>
+        We may update, modify, suspend, or discontinue any part of our
+        games or services at any time.
+    </p>
+
+    <p>
+        Features, content, levels, virtual items, advertisements,
+        availability, and supported devices may change without prior notice.
+    </p>
+
+
+    <h2>11. Intellectual Property</h2>
+
+    <p>
+        All game software, artwork, characters, graphics, animations,
+        sounds, music, logos, text, designs, and other original content
+        provided by RgamesID are protected by applicable intellectual
+        property laws.
+    </p>
+
+    <p>
+        Unless otherwise stated, you may not reproduce, distribute,
+        modify, publish, sell, or commercially exploit our intellectual
+        property without prior written permission.
+    </p>
+
+
+    <h2>12. Disclaimer</h2>
+
+    <p>
+        Our games and services are provided on an "as is" and "as available"
+        basis to the extent permitted by applicable law.
+    </p>
+
+    <p>
+        We do not guarantee that our applications will always operate
+        without interruption, errors, bugs, crashes, or compatibility
+        issues on every device.
+    </p>
+
+
+    <h2>13. Limitation of Liability</h2>
+
+    <p>
+        To the maximum extent permitted by applicable law, RgamesID shall
+        not be responsible for indirect, incidental, special, or
+        consequential damages arising from your use of our games or
+        services.
+    </p>
+
+    <p>
+        This limitation does not apply where prohibited by applicable law.
+    </p>
+
+
+    <h2>14. Termination</h2>
+
+    <p>
+        We may restrict or terminate access to our services if we reasonably
+        believe that a user has violated these Terms, applicable laws, or
+        the rules of the platform through which our applications are
+        distributed.
+    </p>
+
+    <p>
+        You may stop using our applications at any time by uninstalling
+        them from your device.
+    </p>
+
+
+    <h2>15. Changes to These Terms</h2>
+
+    <p>
+        We may update these Terms from time to time to reflect changes in
+        our services, technology, legal requirements, or business practices.
+    </p>
+
+    <p>
+        The updated version will be posted on this page with a revised
+        "Last Updated" date.
+    </p>
+
+    <p>
+        Your continued use of our services after changes become effective
+        constitutes acceptance of the updated Terms, to the extent permitted
+        by applicable law.
+    </p>
+
+
+    <h2>16. Contact Us</h2>
+
+    <p>
+        If you have questions, concerns, or requests regarding these Terms
+        of Service, please contact RgamesID through the contact information
+        provided on our official website.
+    </p>
+
+    <p>
+        Website:
+        <a href="https://rgamesid.github.io/" target="_blank">
+            https://rgamesid.github.io/
+        </a>
+    </p>
+
 
     <div class="footer">
-        &copy; 2026 RgamesID. All Rights Reserved.
+        <p>
+            © 2026 RgamesID. All rights reserved.
+        </p>
+
+        <p>
+            These Terms of Service apply to RgamesID games and applications
+            unless a specific application provides separate terms.
+        </p>
     </div>
+
 </div>
 
 </body>
 </html>
+```
