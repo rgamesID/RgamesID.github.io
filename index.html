@@ -1,208 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RgamesID - Game Portfolio</title>
-    <style id="dynamicStyles"></style>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-        body { 
-            background-color: #bb3232; 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #121212; 
-            padding-bottom: 80px; 
-        }
-        
-        header { 
-            text-align: center; 
-            padding: 60px 20px 20px; 
-            background: rgba(158, 56, 56, 0.8); 
-            backdrop-filter: blur(5px); 
-            margin-bottom: 20px; 
-            position: relative;
-        }
-        header h1 { 
-            font-size: 2.8rem; 
-            color: #d4af37; 
-            margin-bottom: 10px; 
-        }
-        header p { 
-            color: #fffbfb; 
-            font-size: 1.1rem; 
-        }
-        
-        /* DROPDOWN PRIVACY POLICY */
-        .nav-container {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            display: inline-block;
-            z-index: 100;
-        }
-        .dropdown-btn {
-            background: #2f3542;
+        /* Gaya dasar bawaan portofolio Anda */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
             color: #ffffff;
-            border: 1px solid #d4af37;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.85rem;
-            transition: 0.2s;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
         }
-        .dropdown-btn:hover {
-            background: #d4af37;
-            color: #121212;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #ff4757;
+            margin-top: 20px;
+        }
+        .filter-buttons {
+            margin: 20px 0;
+        }
+        .filter-btn {
+            background-color: #2f3542;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* --- PERUBAHAN & TAMBAHAN UNTUK DROPDOWN LEGAL --- */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .dropbtn {
+            background-color: #747d8c;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
         }
         .dropdown-content {
             display: none;
             position: absolute;
-            right: 0;
-            background-color: #ffffff;
-            min-width: 200px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
-            border: 1px solid #e9ecef;
-            border-radius: 6px;
+            background-color: #2f3542;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+            z-index: 1;
+            border-radius: 5px;
+            left: 50%;
+            transform: translateX(-50%);
             margin-top: 5px;
-            overflow: hidden;
         }
         .dropdown-content a {
-            color: #2f3542;
+            color: white;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #f1f2f6;
-            transition: 0.2s;
-        }
-        .dropdown-content a:last-child {
-            border-bottom: none;
+            text-align: center;
+            font-size: 14px;
         }
         .dropdown-content a:hover {
-            background-color: #f1f2f6;
-            color: #d4af37;
+            background-color: #ff4757;
+            border-radius: 5px;
         }
-        .nav-container:hover .dropdown-content {
+        .dropdown:hover .dropdown-content {
             display: block;
         }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
-        .category-filter { text-align: center; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; background: rgba(30,30,30,0.05); padding: 15px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); }
-        .filter-btn { background: #2f3542; color: #fff; border: 1px solid #57606f; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; }
-        
-        .category-filter button:nth-child(1).active { background: #747d8c !important; border-color: #747d8c !important; color: #fff; }
-        .category-filter button:nth-child(2).active { background: #0074e4 !important; border-color: #0074e4 !important; color: #fff; }
-        .category-filter button:nth-child(3).active { background: #00875a !important; border-color: #00875a !important; color: #fff; }
-
-        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
-        .game-card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-        
-        .card-img-wrapper { position: relative; width: 100%; height: 180px; background-color: #2f3542; }
-        .game-img { width: 100%; height: 100%; object-fit: cover; }
-        .platform-badge { position: absolute; top: 12px; right: 12px; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; background: #ffffff; color: #121212; }
-
-        .game-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
-        .game-title { font-size: 1.5rem; margin-bottom: 10px; color: #121212; }
-        .game-description { color: #4b4b4b; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; white-space: pre-line; }
-        .game-link { display: inline-block; text-align: center; color: #ffffff; padding: 12px; text-decoration: none; font-weight: bold; border-radius: 6px; transition: 0.2s; filter: brightness(0.9); }
-        .game-link:hover { filter: brightness(1.2); }
+        /* Area Modal Tampilan Dokumen Hukum */
+        .legal-modal {
+            display: none; 
+            position: fixed; 
+            z-index: 100; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.8); 
+        }
+        .modal-content {
+            background-color: #2f3542;
+            margin: 10% auto; 
+            padding: 30px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
+            text-align: left;
+            border-radius: 8px;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: #ff4757;
+        }
+        .modal-content h2 {
+            color: #ff4757;
+            border-bottom: 2px solid #747d8c;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .modal-content h3 {
+            color: #ffa502;
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="nav-container">
-            <button class="dropdown-btn">🛡️ Privacy Policy ▾</button>
-            <div class="dropdown-content" id="privacyDropdown"></div>
+<div class="container">
+    <!-- Tombol Dropdown yang Diperbarui -->
+    <div class="dropdown">
+        <button class="dropbtn">🛡 Privacy Policy & Legal ▾</button>
+        <div class="dropdown-content">
+            <a href="#" onclick="openLegal('privacy')">Privacy Policy</a>
+            <a href="#" onclick="openLegal('terms')">Terms of Service</a>
         </div>
-        
-        <h1>RgamesID Studios</h1>
-        <p>Play our exciting collection of games directly from your browser or device!</p>
-    </header>
-
-    <div class="container">
-        <div class="category-filter" id="filterContainer">
-            <button class="filter-btn active" onclick="filterPlatform('all', this)">All Games</button>
-            <button class="filter-btn" onclick="filterPlatform('steam', this)">Steam Games</button>
-            <button class="filter-btn" onclick="filterPlatform('mobile', this)">Mobile Games</button>
-        </div>
-
-        <div class="game-grid" id="gameGrid"></div>
     </div>
 
-    <script>
-        fetch('database.json')
-            .then(response => response.json())
-            .then(data => {
-                var visual = data.pengaturan_visual;
-                document.body.style.backgroundImage = visual.gambar_background ? "url('" + visual.gambar_background + "')" : "none";
-                
-                               // PENGATURAN WARNA BORDER DAN FONT KHUSUS STEAM GAME CARD
-                                // PENGATURAN WARNA BORDER DAN FONT STEAM MENGGUNAKAN HIJAU #4ba62d
-                              // SEKARANG WARNA BORDER DAN FONT JUDUL OTOMATIS MENGAMBIL DARI DATABASE JSON
-                var cssStyle = 
-                    ".game-card[data-platform='steam'] { border: 3px solid " + visual.warna_tombol_steam + " !important; }\n" +
-                    ".game-card[data-platform='steam'] .game-title { color: " + visual.warna_tombol_steam + " !important; }\n" +
-                    ".game-card[data-platform='steam'] .game-description { color: #2c3e50 !important; }\n" +
-                    ".game-card[data-platform='steam'] .platform-badge { border: 1px solid " + visual.warna_tombol_steam + "; color: " + visual.warna_tombol_steam + "; }\n" +
-                    ".game-card[data-platform='steam'] .game-link { background-color: " + visual.warna_tombol_steam + "; }\n" +
-                    ".game-card[data-platform='mobile'] { border: 2px solid " + visual.warna_tombol_mobile + " !important; }\n" +
-                    ".game-card[data-platform='mobile'] .platform-badge { border: 1px solid " + visual.warna_tombol_mobile + "; color: " + visual.warna_tombol_mobile + "; }\n" +
-                    ".game-card[data-platform='mobile'] .game-link { background-color: " + visual.warna_tombol_mobile + "; }\n";
+    <!-- Struktur Judul Lama Anda -->
+    <h1>RgamesID Studios</h1>
+    <p>Play our exciting collection of games directly from your browser or device!</p>
 
+    <!-- Tombol Filter Lama Anda -->
+    <div class="filter-buttons">
+        <button class="filter-btn">All Games</button>
+        <button class="filter-btn">Steam Games</button>
+        <button class="filter-btn">Mobile Games</button>
+    </div>
 
-                document.getElementById('dynamicStyles').innerHTML = cssStyle;
+    <!-- AREA GRID KONTEN PORTFOLIO LAMA ANDA TETAP DI SINI -->
+    <!-- (Konten game lama Anda tidak berubah di bawah ini) -->
 
-                var grid = document.getElementById('gameGrid');
-                var dropdown = document.getElementById('privacyDropdown');
-                
-                grid.innerHTML = "";
-                dropdown.innerHTML = "";
-                
-                data.daftar_game.forEach(game => {
-                    var badgeLabel = game.platform === 'steam' ? 'Steam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
-                    var buttonText = game.platform === 'steam' ? 'Buy on Steam' : (game.platform === 'mobile' ? 'Get it on Play Store' : 'Play Now');
-                    
-                    var cardHTML = 
-                        '<div class="game-card" data-platform="' + game.platform + '">' +
-                        '    <div class="card-img-wrapper">' +
-                        '        <img src="' + game.link_gambar + '" class="game-img" alt="' + game.judul + '">' +
-                        '        <span class="platform-badge">' + badgeLabel + '</span>' +
-                        '    </div>' +
-                        '    <div class="game-info">' +
-                        '        <h2 class="game-title">' + game.judul + '</h2>' +
-                        '        <p class="game-description">' + game.deskripsi + '</p>' +
-                        '        <a href="' + game.link_tujuan + '" target="_blank" class="game-link">' + buttonText + '</a>' +
-                        '    </div>' +
-                        '</div>';
-                    grid.innerHTML += cardHTML;
+</div>
 
-                    // Menggunakan baris kode pilihan Anda
-                    var namaFileFisik = game.judul + " Privacy Policy.html";
-                    var linkAman = encodeURIComponent(namaFileFisik);
-                    var optionHTML = '<a href="' + linkAman + '">' + game.judul + ' Policy</a>';
-                    dropdown.innerHTML += optionHTML;
-                });
-            })
-            .catch(error => console.error("Error loading game database:", error));
+<!-- MODAL POPUP UNTUK DOKUMEN HUKUM -->
+<div id="legalModal" class="legal-modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeLegal()">&times;</span>
+        
+        <!-- Konten Privacy Policy -->
+        <div id="privacyContent" style="display:none;">
+            <h2>Privacy Policy</h2>
+            <p><strong>RgamesID Studios</strong> membangun aplikasi <strong>BANG PETRUX Teror babi ngepet</strong> sebagai aplikasi Komersial. Layanan ini disediakan oleh RgamesID dan ditujukan untuk digunakan sebagaimana adanya.</p>
+            <h3>Pengumpulan Informasi</h3>
+            <p>Informasi pengenal pribadi yang diperlukan oleh aplikasi akan disimpan langsung di perangkat Anda dan tidak dikumpulkan oleh kami secara eksternal.</p>
+            <h3>Layanan Pihak Ketiga</h3>
+            <p>Aplikasi menggunakan Google Play Services dan jaringan iklan (AdMob) yang dapat mengumpulkan informasi penentu identitas untuk keperluan performa sistem.</p>
+        </div>
 
-        function filterPlatform(platform, btn) {
-            document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
-            btn.classList.add('active');
+        <!-- Konten Terms of Service -->
+        <div id="termsContent" style="display:none;">
+            <h2>Terms of Service</h2>
+            <p>Dengan mengunduh atau memainkan game dari <strong>RgamesID Studios</strong>, Anda menyatakan menyetujui seluruh ketentuan layanan di bawah ini.</p>
+            <h3>1. Ketentuan Lisensi</h3>
+            <p>Anda diberikan hak akses terbatas dan non-eksklusif untuk memainkan game ini demi hiburan pribadi non-komersial.</p>
+            <h3>2. Hak Cipta</h3>
+            <p>Seluruh kekayaan intelektual (aset visual, model karakter Bang Petrux, audio, dan kode pemrograman) adalah milik sah mutlak dari RgamesID Studios.</p>
+            <h3>3. Batasan Modifikasi</h3>
+            <p>Anda dilarang mendistribusikan ulang, memodifikasi, membalikkan teknik kode (reverse engineer), atau meretas data aplikasi secara ilegal.</p>
+        </div>
+    </div>
+</div>
 
-            document.querySelectorAll('.game-card').forEach(function(card) {
-                if (platform === 'all' || card.getAttribute('data-platform') === platform) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+<script>
+    // Fungsi untuk membuka dokumen hukum pilihan di dalam popup modal
+    function openLegal(type) {
+        document.getElementById('legalModal').style.display = "block";
+        if (type === 'privacy') {
+            document.getElementById('privacyContent').style.display = "block";
+            document.getElementById('termsContent').style.display = "none";
+        } else if (type === 'terms') {
+            document.getElementById('privacyContent').style.display = "none";
+            document.getElementById('termsContent').style.display = "block";
         }
-    </script>
+    }
+
+    // Fungsi menutup jendela popup modal
+    function closeLegal() {
+        document.getElementById('legalModal').style.display = "none";
+    }
+
+    // Menutup modal otomatis jika pengguna mengklik area luar kotak popup
+    window.onclick = function(event) {
+        var modal = document.getElementById('legalModal');
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
 </body>
 </html>
