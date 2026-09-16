@@ -1,276 +1,214 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RgamesID - Game Portfolio</title>
+    <style id="dynamicStyles"></style>
     <style>
-        /* Gaya Dasar & Reset */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            background-color: #121212; /* Warna cadangan sebelum gambar termuat */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { 
+            background-color: #bb3232; 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            color: #121212; 
+            padding-bottom: 80px; 
         }
-
-        /* Overlay Gelap Agar Teks Mudah Dibaca */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
-        }
-
-        /* Konten Utama */
-        .container {
+        
+        header { 
+            text-align: center; 
+            padding: 60px 20px 20px; 
+            background: rgba(158, 56, 56, 0.8); 
+            backdrop-filter: blur(5px); 
+            margin-bottom: 20px; 
             position: relative;
-            z-index: 2;
-            width: 90%;
-            max-width: 1200px;
-            margin: 40px auto;
-            text-align: center;
         }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        header h1 { 
+            font-size: 2.8rem; 
+            color: #d4af37; 
+            margin-bottom: 10px; 
         }
-
-        header p {
-            font-size: 1.1rem;
-            color: #ccc;
-            margin-bottom: 30px;
+        header p { 
+            color: #fffbfb; 
+            font-size: 1.1rem; 
         }
-
-        /* Dropdown Navigasi Legal Baru */
-        .nav-menu {
-            margin-bottom: 40px;
-        }
-
-        .dropdown {
-            position: relative;
+        
+        /* DROPDOWN PRIVACY POLICY */
+        .nav-container {
+            position: absolute;
+            top: 15px;
+            right: 20px;
             display: inline-block;
+            z-index: 100;
         }
-
-        .dropbtn {
-            background-color: rgba(255, 255, 255, 0.15);
-            color: white;
-            padding: 10px 20px;
-            font-size: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
+        .dropdown-btn {
+            background: #2f3542;
+            color: #ffffff;
+            border: 1px solid #d4af37;
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
-            backdrop-filter: blur(5px);
-            transition: background 0.3s;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: 0.2s;
         }
-
-        .dropdown:hover .dropbtn {
-            background-color: rgba(255, 255, 255, 0.3);
+        .dropdown-btn:hover {
+            background: #d4af37;
+            color: #121212;
         }
-
         .dropdown-content {
             display: none;
             position: absolute;
             right: 0;
-            background-color: #1e1e1e;
-            min-width: 180px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
-            z-index: 10;
-            border-radius: 8px;
-            overflow: hidden;
+            background-color: #ffffff;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
             margin-top: 5px;
-            border: 1px solid #333;
+            overflow: hidden;
         }
-
         .dropdown-content a {
-            color: #e0e0e0;
+            color: #2f3542;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
-            text-align: left;
-            font-size: 14px;
-            transition: background 0.2s;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #f1f2f6;
+            transition: 0.2s;
         }
-
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
         .dropdown-content a:hover {
-            background-color: #333;
-            color: #fff;
+            background-color: #f1f2f6;
+            color: #d4af37;
         }
-
-        .dropdown:hover .dropdown-content {
+        .nav-container:hover .dropdown-content {
             display: block;
         }
 
-        /* Grid Daftar Game */
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .category-filter { text-align: center; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; background: rgba(30,30,30,0.05); padding: 15px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); }
+        .filter-btn { background: #2f3542; color: #fff; border: 1px solid #57606f; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        
+        .category-filter button:nth-child(1).active { background: #747d8c !important; border-color: #747d8c !important; color: #fff; }
+        .category-filter button:nth-child(2).active { background: #0074e4 !important; border-color: #0074e4 !important; color: #fff; }
+        .category-filter button:nth-child(3).active { background: #00875a !important; border-color: #00875a !important; color: #fff; }
 
-        .game-card {
-            background: rgba(30, 30, 30, 0.85);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s;
-        }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 20px; }
+        .game-card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        
+        .card-img-wrapper { position: relative; width: 100%; height: 180px; background-color: #2f3542; }
+        .game-img { width: 100%; height: 100%; object-fit: cover; }
+        .platform-badge { position: absolute; top: 12px; right: 12px; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; background: #ffffff; color: #121212; }
 
-        .game-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .game-banner {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .game-info {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: left;
-        }
-
-        .game-title {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .game-desc {
-            font-size: 0.95rem;
-            color: #bbb;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .btn-play {
-            display: inline-block;
-            width: 100%;
-            padding: 12px;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 6px;
-            transition: opacity 0.2s;
-        }
-
-        .btn-play:hover {
-            opacity: 0.9;
-        }
+        .game-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .game-title { font-size: 1.5rem; margin-bottom: 10px; color: #121212; }
+        .game-description { color: #4b4b4b; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; white-space: pre-line; }
+        .game-link { display: inline-block; text-align: center; color: #ffffff; padding: 12px; text-decoration: none; font-weight: bold; border-radius: 6px; transition: 0.2s; filter: brightness(0.9); }
+        .game-link:hover { filter: brightness(1.2); }
     </style>
 </head>
 <body>
 
-    <div class="overlay"></div>
+    <header>
+       <div class="dropdown">
+  <button class="dropbtn">🛡️ Legal & Policies ▾</button>
+  <div class="dropdown-content">
+    <!-- Link ke Privacy Policy yang sudah ada sebelumnya -->
+    <a href="privacy-policy.html">🔒 Privacy Policy</a>
+    
+    <!-- Link Baru untuk Terms of Service -->
+    <a href="terms-of-service.html">📄 Terms of Service</a>
+  </div>
+</div>
+        
+        <h1>RgamesID Studios</h1>
+        <p>Play our exciting collection of games directly from your browser or device!</p>
+    </header>
 
     <div class="container">
-        <header>
-            <h1>RgamesID Studios</h1>
-            <p>Mainkan koleksi game seru kami langsung dari perangkat Anda!</p>
-        </header>
-
-        <!-- Menu Dropdown Baru untuk Kebijakan & Layanan -->
-        <div class="nav-menu">
-            <div class="dropdown">
-                <button class="dropbtn">🛡️ Legal & Policies ▾</button>
-                <div class="dropdown-content">
-                    <a href="privacy-policy.html">🔒 Privacy Policy</a>
-                    <a href="terms-of-service.html">📄 Terms of Service</a>
-                </div>
-            </div>
+        <div class="category-filter" id="filterContainer">
+            <button class="filter-btn active" onclick="filterPlatform('all', this)">All Games</button>
+            <button class="filter-btn" onclick="filterPlatform('steam', this)">Steam Games</button>
+            <button class="filter-btn" onclick="filterPlatform('mobile', this)">Mobile Games</button>
         </div>
 
-        <!-- Wadah Tempat Game Dirender -->
-        <main class="game-grid" id="gameGrid"></main>
+        <div class="game-grid" id="gameGrid"></div>
     </div>
 
     <script>
-        // Data JSON Anda dimasukkan ke dalam objek JavaScript
-        const dataPortfolio = {
-          "pengaturan_visual": {
-            "gambar_background": "https://unsplash.com",
-            "warna_tombol_steam": "#0074e4",
-            "warna_tombol_mobile": "#00875a"
-          },
-          "daftar_game": [
-           {
-              "judul": "The Adventure of TED and the lost magic crystals",
-              "platform": "steam",
-              "link_gambar": "https://steamstatic.com",
-              "deskripsi": "A cozy journey through a world of color. Join TED in this relaxing 2.5D platformer as he jumps, explores, and fights to save the Squirrel Kingdom. Solve relaxing puzzles and discover hidden treasures.",
-              "link_tujuan": "https://steampowered.com"
-            },
-            {
-              "judul": "Bro Petrux",
-              "platform": "mobile",
-              "link_gambar": "https://googleusercontent.com",
-              "deskripsi": "Bro Petrux: Terror of boar demon - Indonesian folklore Runner Game. This exciting runner game takes you into a world full of adventure! Play as Bro Petrux.",
-              "link_tujuan": "https://google.com"
-            }
-          ]
-        };
+        fetch('database.json')
+            .then(response => response.json())
+            .then(data => {
+                var visual = data.pengaturan_visual;
+                document.body.style.backgroundImage = visual.gambar_background ? "url('" + visual.gambar_background + "')" : "none";
+                
+                               // PENGATURAN WARNA BORDER DAN FONT KHUSUS STEAM GAME CARD
+                                // PENGATURAN WARNA BORDER DAN FONT STEAM MENGGUNAKAN HIJAU #4ba62d
+                              // SEKARANG WARNA BORDER DAN FONT JUDUL OTOMATIS MENGAMBIL DARI DATABASE JSON
+                var cssStyle = 
+                    ".game-card[data-platform='steam'] { border: 3px solid " + visual.warna_tombol_steam + " !important; }\n" +
+                    ".game-card[data-platform='steam'] .game-title { color: " + visual.warna_tombol_steam + " !important; }\n" +
+                    ".game-card[data-platform='steam'] .game-description { color: #2c3e50 !important; }\n" +
+                    ".game-card[data-platform='steam'] .platform-badge { border: 1px solid " + visual.warna_tombol_steam + "; color: " + visual.warna_tombol_steam + "; }\n" +
+                    ".game-card[data-platform='steam'] .game-link { background-color: " + visual.warna_tombol_steam + "; }\n" +
+                    ".game-card[data-platform='mobile'] { border: 2px solid " + visual.warna_tombol_mobile + " !important; }\n" +
+                    ".game-card[data-platform='mobile'] .platform-badge { border: 1px solid " + visual.warna_tombol_mobile + "; color: " + visual.warna_tombol_mobile + "; }\n" +
+                    ".game-card[data-platform='mobile'] .game-link { background-color: " + visual.warna_tombol_mobile + "; }\n";
 
-        // 1. Terapkan Gambar Latar Belakang
-        document.body.style.backgroundImage = `url('${dataPortfolio.pengaturan_visual.gambar_background}')`;
 
-        // 2. Render Daftar Game Secara Dinamis
-        const gameGrid = document.getElementById('gameGrid');
-        
-        dataPortfolio.daftar_game.forEach(game => {
-            // Tentukan warna tombol berdasarkan platform game
-            const buttonColor = game.platform === 'steam' 
-                ? dataPortfolio.pengaturan_visual.warna_tombol_steam 
-                : dataPortfolio.pengaturan_visual.warna_tombol_mobile;
+                document.getElementById('dynamicStyles').innerHTML = cssStyle;
 
-            // Teks tombol dinamis
-            const buttonText = game.platform === 'steam' ? 'Mainkan di Steam' : 'Download di Play Store';
+                var grid = document.getElementById('gameGrid');
+                var dropdown = document.getElementById('privacyDropdown');
+                
+                grid.innerHTML = "";
+                dropdown.innerHTML = "";
+                
+                data.daftar_game.forEach(game => {
+                    var badgeLabel = game.platform === 'steam' ? 'Steam' : (game.platform === 'mobile' ? 'Mobile' : game.platform.toUpperCase());
+                    var buttonText = game.platform === 'steam' ? 'Buy on Steam' : (game.platform === 'mobile' ? 'Get it on Play Store' : 'Play Now');
+                    
+                    var cardHTML = 
+                        '<div class="game-card" data-platform="' + game.platform + '">' +
+                        '    <div class="card-img-wrapper">' +
+                        '        <img src="' + game.link_gambar + '" class="game-img" alt="' + game.judul + '">' +
+                        '        <span class="platform-badge">' + badgeLabel + '</span>' +
+                        '    </div>' +
+                        '    <div class="game-info">' +
+                        '        <h2 class="game-title">' + game.judul + '</h2>' +
+                        '        <p class="game-description">' + game.deskripsi + '</p>' +
+                        '        <a href="' + game.link_tujuan + '" target="_blank" class="game-link">' + buttonText + '</a>' +
+                        '    </div>' +
+                        '</div>';
+                    grid.innerHTML += cardHTML;
 
-            // Template struktur kartu game
-            const gameCard = `
-                <div class="game-card">
-                    <img src="${game.link_gambar}" alt="${game.judul}" class="game-banner">
-                    <div class="game-info">
-                        <div>
-                            <h2 class="game-title">${game.judul}</h2>
-                            <p class="game-desc">${game.deskripsi}</p>
-                        </div>
-                        <a href="${game.link_tujuan}" target="_blank" class="btn-play" style="background-color: ${buttonColor}">
-                            ${buttonText}
-                        </a>
-                    </div>
-                </div>
-            `;
-            
-            gameGrid.innerHTML += gameCard;
-        });
+                    // Menggunakan baris kode pilihan Anda
+                    var namaFileFisik = game.judul + " Privacy Policy.html";
+                    var linkAman = encodeURIComponent(namaFileFisik);
+                    var optionHTML = '<a href="' + linkAman + '">' + game.judul + ' Policy</a>';
+                    dropdown.innerHTML += optionHTML;
+                });
+            })
+            .catch(error => console.error("Error loading game database:", error));
+
+        function filterPlatform(platform, btn) {
+            document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+
+            document.querySelectorAll('.game-card').forEach(function(card) {
+                if (platform === 'all' || card.getAttribute('data-platform') === platform) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html>
